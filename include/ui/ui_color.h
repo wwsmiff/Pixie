@@ -36,6 +36,23 @@ struct UIColor{
   {
   }
 
+  void operator+=(uint8_t scalar)
+  {
+    this->r += scalar;
+    this->g += scalar;
+    this->b += scalar;
+  }
+
+  UIColor operator+(uint8_t scalar)
+  {
+    return UIColor(this->r + scalar, this->g + scalar, this->b + scalar, this->a); 
+  }
+
+  UIColor operator-(uint8_t scalar)
+  {
+    return UIColor(this->r - scalar, this->g - scalar, this->b - scalar, this->a); 
+  }
+
   uint8_t r, g, b, a;
 };
 

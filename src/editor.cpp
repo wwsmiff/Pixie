@@ -4,6 +4,8 @@
 
 #include "editor.h"
 #include "ui/ui_window.h"
+#include "ui/ui_button.h"
+#include "ui/ui_color_grid.h"
 
 bool Editor::running = true;
 Editor::Editor()
@@ -57,17 +59,14 @@ void Editor::update()
   SDL_Event event;
   UIWindow testWindow("Test", UISize(600, 800));
   testWindow.setFont("Arial/ARIAL.TTF", 24);
-  UIButton testButton(&testWindow, cb_fn, "Test", UIPosition(100, 100), UISize(50, 25));
-  UIButton testButton2(&testWindow, cb_fn2, "Test", UIPosition(100, 200), UISize(50, 25));
-  testButton.setBGColor(UIColor(255, 68, 76));
-  testButton2.setBGColor(UIColor(0, 200, 255));
+
+  UIColorGrid pallete(&testWindow, UIPosition(10, 10), UISize(8, 2), UISize(30), 0);
+
   while(this->running)
   {
     if(SDL_PollEvent(&event))
     {
       testWindow.handleEvents(event);
-      testButton.handleEvents(event);
-      testButton2.handleEvents(event);
       if(event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(this->_window))
         this->running = false;
     }
@@ -75,8 +74,9 @@ void Editor::update()
     SDL_SetRenderDrawColor(this->_renderer, 255, 255, 255, 255);
     SDL_RenderClear(this->_renderer);
     testWindow.setBackground(UIColor(0x1a1a1aff));
-    testButton.draw();
-    testButton2.draw();
+
+    pallete.draw();
+
     testWindow.draw();
     SDL_RenderPresent(this->_renderer);
   }

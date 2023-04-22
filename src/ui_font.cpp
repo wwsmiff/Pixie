@@ -21,7 +21,11 @@ UIFont::~UIFont()
 {
   for(auto &[x, y] : this->_cache)
   {
-    SDL_DestroyTexture(y);
+    if(y)
+    {
+      SDL_DestroyTexture(y);
+      y = nullptr;
+    }
   }
   this->_cache.clear();
 }

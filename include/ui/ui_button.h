@@ -9,12 +9,12 @@
 
 class UIWindow;
 
-typedef void(*CallbackFunction)();
+typedef void(*ButtonCallback)();
 
 class UIButton
 {
 public:
-  UIButton(UIWindow *window, CallbackFunction callback, const std::string &text, UIPosition position, UISize size, UIColor fg = UIColor(0xFFFFFFFF), UIColor bg = UIColor(0x1a1a1aFF), UIColor outline = UIColor(0xFFFFFFFF));
+  UIButton(UIWindow *window, ButtonCallback callback, const std::string &text, UIPosition position, UISize size, UIColor fg = UIColor(0xFFFFFFFF), UIColor bg = UIColor(0x1a1a1aFF), UIColor outline = UIColor(0xFFFFFFFF));
   ~UIButton();
 
   void handleEvents(SDL_Event &event);
@@ -29,7 +29,7 @@ protected:
   UISize _size;
   UIColor _fg, _bg;
   UIColor _outline;
-  CallbackFunction _callback;
+  ButtonCallback _callback;
   std::string _text;
 };
 

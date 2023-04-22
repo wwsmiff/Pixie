@@ -4,7 +4,6 @@
 #include <SDL2/SDL.h>
 #include "ui/ui_color.h"
 #include "ui/ui_size.h"
-#include "ui/ui_button.h"
 #include "ui/ui_font.h"
 
 class UIWindow
@@ -20,7 +19,9 @@ public:
   SDL_Window *getWindow() const;
   SDL_Renderer *getRenderer() const;
 
-  friend UIButton;
+  friend class UIButton;
+  friend class UIColorButton;
+  friend class UIColorGrid;
 
 protected:
   SDL_Window *_window;

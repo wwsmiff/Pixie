@@ -3,7 +3,7 @@
 #include "ui/ui_button.h"
 #include "ui/ui_window.h"
 
-UIButton::UIButton(UIWindow *window, CallbackFunction callback, const std::string &text, UIPosition position, UISize size, UIColor fg, UIColor bg, UIColor outline)
+UIButton::UIButton(UIWindow *window, ButtonCallback callback, const std::string &text, UIPosition position, UISize size, UIColor fg, UIColor bg, UIColor outline)
   :_window(window),
    _position(position),
    _size(size),
