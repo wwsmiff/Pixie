@@ -5,26 +5,25 @@
 
 #include "macros.h"
 #include "ui/ui_window.h"
-#include "ui/ui_color_grid.h"
+#include "ui/ui_color_palette.h"
 
-UIColorGrid::UIColorGrid(UIWindow *window, UIPosition position, UISize size, UISize cellSize, uint32_t padding)
+UIColorPalette::UIColorPalette(UIWindow *window, UIPosition position, UISize size, UISize cellSize, uint32_t padding)
   :_window(window),
    _position(position),
    _size(size),
    _cellSize(cellSize),
    _padding(padding)
 {
-  import("config/sweetie-16.colors");
-  
+  this->import("palettes/sweetie-16.colors");
 }
 
-UIColorGrid::~UIColorGrid()
+UIColorPalette::~UIColorPalette()
 {
   for(size_t i = 0; i < this->_colors.size(); ++i)
     delete this->_colors[i];
 }
 
-void UIColorGrid::import(const std::string &path)
+void UIColorPalette::import(const std::string &path)
 {
   std::ifstream inputFile(path);
   std::vector<uint32_t> hexCodes;
@@ -42,7 +41,7 @@ void UIColorGrid::import(const std::string &path)
   }
 }
 
-void UIColorGrid::draw()
+void UIColorPalette::draw()
 {
   for(size_t i = 0; i < this->_colors.size(); ++i)
   {
@@ -56,6 +55,11 @@ void UIColorGrid::draw()
   }
 }
 
-void UIColorGrid::update()
+void UIColorPalette::update(SDL_Event &event)
 {
+  for(const auto &x : this->_colors)
+  {
+    if(x->clicked(event))
+      std::cout << std::hex << x->hex() << std::endl;
+  }
 }

@@ -33,9 +33,15 @@ UIWindow::UIWindow(const std::string &title, UISize size)
 UIWindow::~UIWindow()
 {
   if(this->_renderer)
+  {
     SDL_DestroyRenderer(this->_renderer);
+    this->_renderer = nullptr;
+  }
   if(this->_window)
+  {
     SDL_DestroyWindow(this->_window);
+    this->_window = nullptr;
+  }
 }
 
 void UIWindow::setBackground(UIColor color)
@@ -51,16 +57,7 @@ void UIWindow::draw()
 
 void UIWindow::close()
 {
-  if(this->_renderer)
-  {
-    SDL_DestroyRenderer(this->_renderer);
-    this->_renderer = nullptr;
-  }
-  if(this->_window)
-  {
-    SDL_DestroyWindow(this->_window);
-    this->_window = nullptr;
-  }
+  SDL_HideWindow(this->_window);
 }
 
 void UIWindow::handleEvents(SDL_Event &event)

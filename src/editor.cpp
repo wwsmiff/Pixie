@@ -5,7 +5,7 @@
 #include "editor.h"
 #include "ui/ui_window.h"
 #include "ui/ui_button.h"
-#include "ui/ui_color_grid.h"
+#include "ui/ui_color_palette.h"
 
 bool Editor::running = true;
 Editor::Editor()
@@ -60,13 +60,14 @@ void Editor::update()
   UIWindow testWindow("Test", UISize(600, 800));
   testWindow.setFont("Arial/ARIAL.TTF", 24);
 
-  UIColorGrid pallete(&testWindow, UIPosition(10, 10), UISize(8, 2), UISize(30), 0);
+  UIColorPalette palette(&testWindow, UIPosition(10, 10), UISize(8, 2), UISize(30), 0);
 
   while(this->running)
   {
     if(SDL_PollEvent(&event))
     {
       testWindow.handleEvents(event);
+      palette.update(event);
       if(event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(this->_window))
         this->running = false;
     }
@@ -75,7 +76,7 @@ void Editor::update()
     SDL_RenderClear(this->_renderer);
     testWindow.setBackground(UIColor(0x1a1a1aff));
 
-    pallete.draw();
+    palette.draw();
 
     testWindow.draw();
     SDL_RenderPresent(this->_renderer);

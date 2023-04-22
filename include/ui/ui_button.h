@@ -8,20 +8,21 @@
 #include "ui/ui_color.h"
 
 class UIWindow;
-
-typedef void(*ButtonCallback)();
+// typedef void(*ButtonCallback)();
 
 class UIButton
 {
 public:
-  UIButton(UIWindow *window, ButtonCallback callback, const std::string &text, UIPosition position, UISize size, UIColor fg = UIColor(0xFFFFFFFF), UIColor bg = UIColor(0x1a1a1aFF), UIColor outline = UIColor(0xFFFFFFFF));
+  UIButton(UIWindow *window, const std::string &text, UIPosition position, UISize size, UIColor fg = UIColor(0xFFFFFFFF), UIColor bg = UIColor(0x1a1a1aFF), UIColor outline = UIColor(0xFFFFFFFF));
   ~UIButton();
 
-  void handleEvents(SDL_Event &event);
+  // void handleEvents(SDL_Event &event);
   void draw();
   void setFGColor(UIColor color);
   void setBGColor(UIColor color);
   void setOutlineColor(UIColor color);
+
+  bool clicked(SDL_Event &event) const;
  
 protected:
   UIWindow *_window;
@@ -29,7 +30,6 @@ protected:
   UISize _size;
   UIColor _fg, _bg;
   UIColor _outline;
-  ButtonCallback _callback;
   std::string _text;
 };
 

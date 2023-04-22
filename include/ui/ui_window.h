@@ -21,7 +21,7 @@ public:
 
   friend class UIButton;
   friend class UIColorButton;
-  friend class UIColorGrid;
+  friend class UIColorPalette;
 
 protected:
   SDL_Window *_window;

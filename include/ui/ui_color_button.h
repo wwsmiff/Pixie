@@ -8,6 +8,7 @@
 
 typedef void(*ColorButtonCallback)(uint32_t);
 
+union SDL_Event;
 class UIWindow;
 
 class UIColorButton
@@ -18,8 +19,11 @@ public:
 
   void update();
   void draw();
+  uint32_t hex() const;
 
-  friend class UIColorGrid;
+  bool clicked(SDL_Event &event) const;
+
+  friend class UIColorPalette;
 
 protected:
   UIColor _color;

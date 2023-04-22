@@ -1,5 +1,5 @@
-#ifndef UI_COLOR_GRID_H_
-#define UI_COLOR_GRID_H_
+#ifndef UI_COLOR_PALETTE_H_
+#define UI_COLOR_PALETTE_H_
 
 #include <vector>
 #include "ui/ui_color_button.h"
@@ -8,14 +8,14 @@
 
 class UIWindow;
 
-class UIColorGrid
+class UIColorPalette
 {
 public:
-  UIColorGrid(UIWindow *window, UIPosition position, UISize size, UISize cellSize, uint32_t padding);
-  ~UIColorGrid();
+  UIColorPalette(UIWindow *window, UIPosition position, UISize size, UISize cellSize, uint32_t padding);
+  ~UIColorPalette();
 
   void import(const std::string &path);
-  void update();
+  void update(SDL_Event &event);
   void draw();
 
   friend UIColorButton;
@@ -29,4 +29,4 @@ protected:
   uint32_t _selectedColor;
 };
 
-#endif /* UI_COLOR_GRID_H_ */
+#endif /* UI_COLOR_PALETTE_H_ */
