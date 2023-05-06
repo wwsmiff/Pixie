@@ -22,7 +22,7 @@ public:
   void setBGColor(UIColor color);
   void setOutlineColor(UIColor color);
 
-  bool clicked(SDL_Event &event) const;
+  bool clicked() const;
  
 protected:
   UIWindow *_window;

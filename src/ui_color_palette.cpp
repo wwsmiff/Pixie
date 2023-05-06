@@ -5,16 +5,19 @@
 
 #include "macros.h"
 #include "ui/ui_window.h"
+#include "ui/ui_color_button.h"
 #include "ui/ui_color_palette.h"
 
-UIColorPalette::UIColorPalette(UIWindow *window, UIPosition position, UISize size, UISize cellSize, uint32_t padding)
+uint32_t UIColorPalette::selectedColor = 0;
+
+UIColorPalette::UIColorPalette(UIWindow *window, const std::string &path, UIPosition position, UISize size, UISize cellSize, uint32_t padding)
   :_window(window),
    _position(position),
    _size(size),
    _cellSize(cellSize),
    _padding(padding)
 {
-  this->import("palettes/sweetie-16.colors");
+  this->import(path);
 }
 
 UIColorPalette::~UIColorPalette()
@@ -36,7 +39,7 @@ void UIColorPalette::import(const std::string &path)
   {
     for(uint32_t j = 0; j < this->_size.w; ++j)
     {
-      this->_colors.push_back(new UIColorButton(this->_window, UIColor(hexCodes[i * this->_size.w + j]), UIColor(0x000000FF), UIPosition((j * (this->_cellSize.w + this->_padding)) + this->_cellSize.w , (i * (this->_cellSize.h + this->_padding)) + this->_cellSize.h), UISize(this->_cellSize)));
+      this->_colors.push_back(new UIColorButton(this->_window, UIColor(hexCodes[i * this->_size.w + j]), UIColor(0x000000FF), UIPosition(this->_position.x + (j * (this->_cellSize.w + this->_padding)) + this->_cellSize.w , this->_position.y + (i * (this->_cellSize.h + this->_padding)) + this->_cellSize.h), UISize(this->_cellSize)));
     }
   }
 }
@@ -47,7 +50,6 @@ void UIColorPalette::draw()
   {
     UIColorButton *current = this->_colors[i];
     SDL_Rect tmp = {current->_position.x, current->_position.y, current->_size.w, current->_size.h};
-    // SDL_Rect tmpOutline = {current->_position.x, current->_position.y, current->_size.w, current->_size.h};
     SDL_SetRenderDrawColor(this->_window->_renderer, current->_color.r, current->_color.g, current->_color.b, current->_color.a);
     SDL_RenderFillRect(this->_window->_renderer, &tmp);
     SDL_SetRenderDrawColor(this->_window->_renderer, current->_outline.r, current->_outline.g, current->_outline.b, current->_outline.a);
@@ -55,11 +57,11 @@ void UIColorPalette::draw()
   }
 }
 
-void UIColorPalette::update(SDL_Event &event)
+void UIColorPalette::update()
 {
   for(const auto &x : this->_colors)
   {
-    if(x->clicked(event))
-      std::cout << std::hex << x->hex() << std::endl;
+    if(x->clicked())
+      UIColorPalette::selectedColor = x->_color.hex();
   }
 }

@@ -5,7 +5,7 @@ set -xe
 # Important flag, set to 1 for additional compiler flags that
 # may slow down the program but enables debugging options 
 # and 0 for optimal compiler flags.
-DEBUG=1
+DEBUG=0
 
 INCLUDEDIR="./include"
 SRCDIR="./src"
@@ -38,7 +38,7 @@ run() {
 }
 
 clean() {
-  rm -rf $BUILDDIR $OBJDIR
+  rm -rf $BUILDDIR $OBJDIR *.ppm *.png *.jpg *.bmp
 }
 
 "$@"

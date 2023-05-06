@@ -53,6 +53,12 @@ struct UIColor{
     return UIColor(this->r - scalar, this->g - scalar, this->b - scalar, this->a); 
   }
 
+
+  constexpr uint32_t hex() const
+  {
+    return (this->r << 24 | this->g << 16 | this->b << 8 | this->a);
+  }
+
   uint8_t r, g, b, a;
 };
 

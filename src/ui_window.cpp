@@ -4,7 +4,7 @@
 
 #include "ui/ui_window.h"
 
-UIWindow::UIWindow(const std::string &title, UISize size)
+UIWindow::UIWindow(const std::string &title, UISize size, SDL_Event *event)
 {
   /* Do not disable compositor in Xorg */
   putenv((char *)"SDL_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR=0");
@@ -28,6 +28,8 @@ UIWindow::UIWindow(const std::string &title, UISize size)
     std::cerr << "Failed to create a renderer, " << SDL_GetError() << std::endl;
     exit(1);
   }
+
+  this->_event = event;
 }
 
 UIWindow::~UIWindow()
@@ -60,13 +62,16 @@ void UIWindow::close()
   SDL_HideWindow(this->_window);
 }
 
-void UIWindow::handleEvents(SDL_Event &event)
+void UIWindow::handleEvents()
 {
-  if(event.window.windowID == SDL_GetWindowID(this->_window))
+  SDL_GetMouseState(&this->_mouseX, &this->_mouseY);
+  if(this->_event)
   {
-    SDL_GetMouseState(&this->_mouseX, &this->_mouseY);
-    if(event.window.event == SDL_WINDOWEVENT_CLOSE)
-      this->close();
+     if(this->_event->window.windowID == SDL_GetWindowID(this->_window))
+     {
+      if(this->_event->window.event == SDL_WINDOWEVENT_CLOSE)
+        this->close();
+     }
   }
 }
 

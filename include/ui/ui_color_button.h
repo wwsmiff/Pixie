@@ -6,8 +6,6 @@
 #include "ui/ui_position.h"
 #include "ui/ui_size.h"
 
-typedef void(*ColorButtonCallback)(uint32_t);
-
 union SDL_Event;
 class UIWindow;
 
@@ -20,9 +18,8 @@ public:
   void update();
   void draw();
   uint32_t hex() const;
-
-  bool clicked(SDL_Event &event) const;
-
+  bool clicked() const;
+ 
   friend class UIColorPalette;
 
 protected:
