@@ -42,6 +42,7 @@ chmod +x ./build.sh
 ```
 
 ### Contributing
+ - [Join the Discord server](https://discord.gg/rKvarBcpEk)
  - [contributing.md](contributing.md)
 
 ### Libraries used
