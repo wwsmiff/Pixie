@@ -38,7 +38,7 @@ run() {
 }
 
 clean() {
-  rm -rf $BUILDDIR $OBJDIR
+  rm -rf $BUILDDIR $OBJDIR *.ppm *.png *.jpg *.bmp
 }
 
 "$@"

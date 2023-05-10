@@ -20,32 +20,29 @@ UIButton::~UIButton()
 
 void UIButton::draw()
 {
+  UIColor currentBG = this->_bg;
+  UIColor hoverBG = this->_bg + 25;
+  UIColor clickedBG = this->_bg - 25;
+
+  if(this->_window->_mouseX >= this->_position.x && this->_window->_mouseX <= this->_position.x + this->_size.w
+      && this->_window->_mouseY >= this->_position.y && this->_window->_mouseY <= this->_position.y + this->_size.h)
+    currentBG = hoverBG;
+  else  
+    currentBG = this->_bg;
+  
   SDL_Rect outline = {this->_position.x, this->_position.y, this->_size.w + 1, this->_size.h + 1};
   SDL_Rect background = {this->_position.x, this->_position.y, this->_size.w, this->_size.h};
 
   /* Background */
-  SDL_SetRenderDrawColor(this->_window->_renderer, this->_bg.r, this->_bg.g, this->_bg.b, this->_bg.a);
+  SDL_SetRenderDrawColor(this->_window->_renderer, currentBG.r, currentBG.g, currentBG.b, currentBG.a);
   SDL_RenderFillRect(this->_window->_renderer, &background);  
   /* Outline */
   SDL_SetRenderDrawColor(this->_window->_renderer, this->_outline.r, this->_outline.g, this->_outline.b, this->_outline.a);
   SDL_RenderDrawRect(this->_window->_renderer, &outline);
 
   /* Text */
-  this->_window->_font.draw(this->_text, this->_window->_renderer, this->_fg, UIPosition(background.x + 12, background.y + 6), UISize(background.w - 24, background.h - 12));
+  this->_window->_font.draw(this->_text, this->_window->_renderer, this->_fg, UIPosition(background.x + 15, background.y + 10), UISize(background.w - 30, background.h - 20));
 }
-
-// void UIButton::handleEvents(SDL_Event &event)
-// {
-
-//   if(event.window.windowID == SDL_GetWindowID(this->_window->_window))
-//   {
-//     if(this->_window->_mouseX >= this->_position.x && this->_window->_mouseX <= this->_position.x + this->_size.w
-//        && this->_window->_mouseY >= this->_position.y && this->_window->_mouseY <= this->_position.y + this->_size.h
-//        && event.type == SDL_MOUSEBUTTONDOWN)
-//     {
-//     }
-//   }
-// }
 
 void UIButton::setFGColor(UIColor color)
 {
@@ -62,15 +59,17 @@ void UIButton::setOutlineColor(UIColor color)
   this->_outline = color;
 }
 
-bool UIButton::clicked(SDL_Event &event) const
+bool UIButton::clicked() const
 {
-  if(event.window.windowID == SDL_GetWindowID(this->_window->_window))
+  if(this->_window->_event->window.windowID == SDL_GetWindowID(this->_window->_window))
   {
     if(this->_window->_mouseX >= this->_position.x && this->_window->_mouseX <= this->_position.x + this->_size.w
        && this->_window->_mouseY >= this->_position.y && this->_window->_mouseY <= this->_position.y + this->_size.h
-       && event.type == SDL_MOUSEBUTTONDOWN)
+       && this->_window->_event->type == SDL_MOUSEBUTTONDOWN)
     {
       return true;
     }
   }
+
+  return false;
 }

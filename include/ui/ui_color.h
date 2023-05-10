@@ -4,6 +4,14 @@
 #include <cstdint>
 
 struct UIColor{
+  UIColor()
+    :r(0),
+     g(0),
+     b(0),
+     a(0)
+  {
+  }
+
   UIColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255)
     :r(r), g(g), b(b), a(a)
   {
@@ -51,6 +59,12 @@ struct UIColor{
   UIColor operator-(uint8_t scalar)
   {
     return UIColor(this->r - scalar, this->g - scalar, this->b - scalar, this->a); 
+  }
+
+
+  constexpr uint32_t hex() const
+  {
+    return (this->r << 24 | this->g << 16 | this->b << 8 | this->a);
   }
 
   uint8_t r, g, b, a;
