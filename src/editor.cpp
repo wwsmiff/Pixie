@@ -9,7 +9,6 @@
 #include "ui/ui_button.h"
 #include "ui/ui_color_palette.h"
 #include "ui/ui_size.h"
-#include "ui/ui_slider.h"
 #include "export.h"
 
 bool Editor::running = true;
@@ -123,8 +122,6 @@ void Editor::mainloop()
   UIButton openButton = UIButton(&testWindow, "Open", UIPosition(100, 600), UISize(75, 35), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
   UIButton saveButton = UIButton(&testWindow, "Save", UIPosition(200, 600), UISize(75, 35), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
 
-  UISlider slider = UISlider(&testWindow, UIPosition(30, 30), 50);
-
   while(this->running)
   {
     if(SDL_PollEvent(&event))
@@ -216,8 +213,6 @@ void Editor::mainloop()
     exportPNGButton.draw();
     saveButton.draw();
     openButton.draw();
-
-    slider.draw();
 
     testWindow.draw();
 
