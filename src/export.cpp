@@ -3,7 +3,7 @@
 #include "export.h"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_writer.h"
+#include "stb_image_write.h"
 
 Image::Image(uint32_t width, uint32_t height)
 {

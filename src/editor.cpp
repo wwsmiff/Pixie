@@ -114,8 +114,9 @@ void Editor::mainloop()
   UIWindow testWindow("Tools", UISize(600, 800), &event);
   testWindow.setFont("Arial/ARIAL.TTF", 32);
 
-  UIColorPalette palette = UIColorPalette(&testWindow, "palettes/sweetie-16.colors", UIPosition(10, 100), UISize(8, 2), UISize(30), 0);
-  UIColorPalette palette2 = UIColorPalette(&testWindow, "palettes/lost-century.colors", UIPosition(10, 300), UISize(8, 2), UISize(30), 0);
+  UIColorPalette palette = UIColorPalette(&testWindow, "palettes/sweetie-16.colors", UIPosition(10, 10), UISize(8, 2), UISize(30), 0);
+  UIColorPalette palette2 = UIColorPalette(&testWindow, "palettes/lost-century.colors", UIPosition(10, 110), UISize(8, 2), UISize(30), 0);
+  UIColorPalette palette3 = UIColorPalette(&testWindow, "palettes/tempoppy-witchy-muted.colors", UIPosition(10, 210), UISize(16, 2), UISize(30), 0);
   UIButton clearButton = UIButton(&testWindow, "Clear", UIPosition(100, 500), UISize(70, 35), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
   UIButton exportPPMButton = UIButton(&testWindow, "Export to PPM", UIPosition(100, 550), UISize(130, 32), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
   UIButton exportPNGButton = UIButton(&testWindow, "Export to PNG", UIPosition(250, 550), UISize(130, 32), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
@@ -131,6 +132,7 @@ void Editor::mainloop()
       testWindow.handleEvents();
       palette.update();
       palette2.update();
+      palette3.update();
 
       if(event.window.windowID == SDL_GetWindowID(this->_window._window))
       {
@@ -206,8 +208,9 @@ void Editor::mainloop()
     
     testWindow.setBackground(UIColor(0x1a1a1aff));
 
-    palette2.draw();
     palette.draw();
+    palette2.draw();
+    palette3.draw();
     clearButton.draw();
     exportPPMButton.draw();
     exportPNGButton.draw();
