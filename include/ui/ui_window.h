@@ -23,6 +23,7 @@ public:
   friend class UIButton;
   friend class UIColorButton;
   friend class UIColorPalette;
+  friend class UISlider;
 
 protected:
   SDL_Window *_window;

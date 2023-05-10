@@ -5,7 +5,7 @@ set -xe
 # Important flag, set to 1 for additional compiler flags that
 # may slow down the program but enables debugging options 
 # and 0 for optimal compiler flags.
-DEBUG=0
+DEBUG=1
 
 INCLUDEDIR="./include"
 SRCDIR="./src"

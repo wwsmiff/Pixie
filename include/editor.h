@@ -17,6 +17,8 @@ public:
   ~Editor();
   void draw();
   void update();
+  void save();
+  void open();
   void mainloop();
 
   static bool running;

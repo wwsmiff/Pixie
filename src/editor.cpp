@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <SDL2/SDL.h>
 
@@ -8,6 +9,7 @@
 #include "ui/ui_button.h"
 #include "ui/ui_color_palette.h"
 #include "ui/ui_size.h"
+#include "ui/ui_slider.h"
 #include "export.h"
 
 bool Editor::running = true;
@@ -67,30 +69,61 @@ void Editor::draw()
 
   SDL_SetRenderDrawColor(this->_window._renderer, 0, 0, 0, 255);
   for(uint32_t i = 0; i < (this->_canvasSize.h + this->_blockSize.h); i += (this->_blockSize.h * this->_scale))
-  {
     SDL_RenderDrawLine(this->_window._renderer, startY, i + startY, this->_canvasSize.w + startY, i + startY);
-  }
   for(uint32_t i = 0; i < (this->_canvasSize.w + this->_blockSize.w); i += (this->_blockSize.w * this->_scale))
-  {
     SDL_RenderDrawLine(this->_window._renderer, i + startX, startX, i + startX, this->_canvasSize.h + startX);
-  }
 }
 
 void Editor::update()
 {
 }
 
+void Editor::save()
+{
+  std::ofstream savefile("save.pixie");
+  savefile << this->_canvasSize.w << '\n';
+  savefile << this->_canvasSize.h << '\n';
+
+  for(const auto &x : this->_grid)
+    savefile << x.hex() << '\n';
+
+  savefile.close();
+}
+
+void Editor::open()
+{
+  std::ifstream savefile("save.pixie");
+  uint32_t width = 0, height = 0;
+  std::string line;
+  std::getline(savefile, line); width = std::stoul(line);
+  std::getline(savefile, line); height = std::stoul(line);
+  this->_grid.clear();
+  this->_grid.resize(width * height);
+  size_t counter = 0;
+  while(std::getline(savefile, line))
+  {
+    this->_grid.at(counter) = UIColor(std::stoul(line));
+    counter++;
+  }
+
+  savefile.close();
+}
+
 void Editor::mainloop()
 {
   SDL_Event event;
   UIWindow testWindow("Tools", UISize(600, 800), &event);
-  testWindow.setFont("Arial/ARIAL.TTF", 24);
+  testWindow.setFont("Arial/ARIAL.TTF", 32);
 
   UIColorPalette palette = UIColorPalette(&testWindow, "palettes/sweetie-16.colors", UIPosition(10, 100), UISize(8, 2), UISize(30), 0);
   UIColorPalette palette2 = UIColorPalette(&testWindow, "palettes/lost-century.colors", UIPosition(10, 300), UISize(8, 2), UISize(30), 0);
-  UIButton clearButton = UIButton(&testWindow, "Clear", UIPosition(300, 400), UISize(70, 35), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
-  UIButton exportPPMButton = UIButton(&testWindow, "Export to PPM", UIPosition(200, 550), UISize(120, 35), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
-  UIButton exportPNGButton = UIButton(&testWindow, "Export to PNG", UIPosition(400, 550), UISize(120, 35), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
+  UIButton clearButton = UIButton(&testWindow, "Clear", UIPosition(100, 500), UISize(70, 35), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
+  UIButton exportPPMButton = UIButton(&testWindow, "Export to PPM", UIPosition(100, 550), UISize(130, 32), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
+  UIButton exportPNGButton = UIButton(&testWindow, "Export to PNG", UIPosition(250, 550), UISize(130, 32), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
+  UIButton openButton = UIButton(&testWindow, "Open", UIPosition(100, 600), UISize(75, 35), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
+  UIButton saveButton = UIButton(&testWindow, "Save", UIPosition(200, 600), UISize(75, 35), UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
+
+  UISlider slider = UISlider(&testWindow, UIPosition(30, 30), 50);
 
   while(this->running)
   {
@@ -121,13 +154,30 @@ void Editor::mainloop()
 
         if(event.type == SDL_MOUSEBUTTONDOWN)
         {
-          if(event.button.button == SDL_BUTTON_LEFT)
+          
+          if(this->_window._mouseX > 100 && this->_window._mouseX < (100 + this->_canvasSize.w) 
+              && this->_window._mouseY > 100 && this->_window._mouseY < (100 + this->_canvasSize.h)) /* A very temporary and crappy fix for preventing a crash when clicking outside the grid */
           {
-             UIColor &current = this->_grid.at(((this->_window._mouseY - 100) / this->_blockSize.h) * (this->_canvasSize.w / this->_blockSize.w) + ((this->_window._mouseX - 100) / this->_blockSize.w));
-             current = UIColorPalette::selectedColor;
+            if(event.button.button == SDL_BUTTON_LEFT)
+            {
+              UIColor &current = this->_grid.at(((this->_window._mouseY - 100) / this->_blockSize.h) * (this->_canvasSize.w / this->_blockSize.w) + ((this->_window._mouseX - 100) / this->_blockSize.w));
+              current = UIColorPalette::selectedColor;
+            }
+
+            else if(event.button.button == SDL_BUTTON_RIGHT)
+            {
+              UIColor &current = this->_grid.at(((this->_window._mouseY - 100) / this->_blockSize.h) * (this->_canvasSize.w / this->_blockSize.w) + ((this->_window._mouseX - 100) / this->_blockSize.w));
+              current = 0x00000000;
+            }
           }
         }
       }
+
+      if(openButton.clicked())
+        this->open();
+
+      if(saveButton.clicked())
+        this->save();
 
       if(clearButton.clicked())
         for(auto &x : this->_grid)
@@ -152,7 +202,7 @@ void Editor::mainloop()
         Image target = Image::upscale(input, this->_blockSize.w);
         Image::exportToPNG(target, "output.png");
       }
-     }
+    }
 
     SDL_SetRenderDrawColor(this->_window._renderer, 255, 255, 255, 255);
     SDL_RenderClear(this->_window._renderer);
@@ -164,6 +214,11 @@ void Editor::mainloop()
     clearButton.draw();
     exportPPMButton.draw();
     exportPNGButton.draw();
+    saveButton.draw();
+    openButton.draw();
+
+    slider.draw();
+
     testWindow.draw();
 
     this->draw();

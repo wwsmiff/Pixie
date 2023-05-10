@@ -14,7 +14,7 @@ UIFont::UIFont(const std::string &font, uint32_t size)
     std::cerr << "Failed to open font: " << font << ", " << TTF_GetError() << std::endl;
     exit(1);
   }
-  TTF_SetFontHinting(this->_font, TTF_HINTING_LIGHT_SUBPIXEL);
+  TTF_SetFontHinting(this->_font, TTF_HINTING_LIGHT);
 }
 
 UIFont::~UIFont()
