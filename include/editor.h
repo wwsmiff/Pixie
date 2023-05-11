@@ -4,8 +4,8 @@
 #include <cstdint>
 #include <vector>
 
-#include "ui/ui_window.h"
 #include "ui/ui_color.h"
+#include "ui/ui_window.h"
 
 struct SDL_Window;
 struct SDL_Renderer;

@@ -1,10 +1,10 @@
 #ifndef UI_WINDOW_H_
 #define UI_WINDOW_H_
 
-#include <SDL2/SDL.h>
 #include "ui/ui_color.h"
-#include "ui/ui_size.h"
 #include "ui/ui_font.h"
+#include "ui/ui_size.h"
+#include <SDL2/SDL.h>
 
 class UIWindow
 {
