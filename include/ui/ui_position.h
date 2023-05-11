@@ -7,20 +7,11 @@ struct UIPosition
 {
   uint32_t x, y;
 
-  UIPosition()
-    :x(0), y(0)
-  {
-  }
+  UIPosition() : x(0), y(0) {}
 
-  UIPosition(uint32_t x, uint32_t y)
-    :x(x), y(y)
-  {
-  }
+  UIPosition(uint32_t x, uint32_t y) : x(x), y(y) {}
 
-  UIPosition(uint32_t scalar)
-    :x(scalar), y(scalar)
-  {
-  }
+  UIPosition(uint32_t scalar) : x(scalar), y(scalar) {}
 
   void set(uint32_t x, uint32_t y)
   {

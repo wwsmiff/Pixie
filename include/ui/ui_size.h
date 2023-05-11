@@ -7,20 +7,11 @@ struct UISize
 {
   uint32_t w, h;
 
-  UISize()
-    :w(0), h(0)
-  {
-  }
+  UISize() : w(0), h(0) {}
 
-  UISize(uint32_t w, uint32_t h)
-    :w(w), h(h)
-  {
-  }
+  UISize(uint32_t w, uint32_t h) : w(w), h(h) {}
 
-  UISize(uint32_t scalar)
-    :w(scalar), h(scalar)
-  {
-  }
+  UISize(uint32_t scalar) : w(scalar), h(scalar) {}
 
   void set(uint32_t w, uint32_t h)
   {
