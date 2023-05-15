@@ -2,6 +2,10 @@
 
 Pixie is a pixel art editor written in C++ and SDL2 still in early stages of development
 
+### Requirements
+- Any c++ compiler thats supports c++20
+- cmake >= 3.18
+
 ### TODO
 - [Planned Features](planned_features.md)
 - [Planned Bug fixes](planned_bugfixes.md)
@@ -36,9 +40,8 @@ Build and run:
 ```bash
 git clone https://github.com/wwsmiff/pixel_art_editor
 cd pixel_art_editor
-chmod +x ./build.sh
-./build.sh build # To compile the project
-./build.sh run # To run the project
+cmake -S . -B build # To build the project
+./build/Pixie # To run the project
 ```
 
 ### Contributing
