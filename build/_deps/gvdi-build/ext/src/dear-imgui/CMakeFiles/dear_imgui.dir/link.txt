@@ -1,2 +1,0 @@
-/usr/bin/ar qc libdear_imgui.a CMakeFiles/dear_imgui.dir/backends/imgui_impl_glfw.cpp.o CMakeFiles/dear_imgui.dir/backends/imgui_impl_vulkan.cpp.o CMakeFiles/dear_imgui.dir/imgui.cpp.o CMakeFiles/dear_imgui.dir/imgui_demo.cpp.o CMakeFiles/dear_imgui.dir/imgui_draw.cpp.o CMakeFiles/dear_imgui.dir/imgui_tables.cpp.o CMakeFiles/dear_imgui.dir/imgui_widgets.cpp.o
-/usr/bin/ranlib libdear_imgui.a

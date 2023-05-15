@@ -1,2 +1,0 @@
-/usr/bin/ar qc libgvdi.a CMakeFiles/gvdi.dir/src/gvdi.cpp.o
-/usr/bin/ranlib libgvdi.a
