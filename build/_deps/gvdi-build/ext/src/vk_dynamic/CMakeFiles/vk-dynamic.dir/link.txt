@@ -1,0 +1,2 @@
+/usr/bin/ar qc libvk-dynamic.a "CMakeFiles/vk-dynamic.dir/src/vk.cpp.o"
+/usr/bin/ranlib libvk-dynamic.a

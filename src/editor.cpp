@@ -128,7 +128,7 @@ void Editor::mainloop()
                      UIPosition(10, 110), UISize(8, 2), UISize(30), 0);
   UIColorPalette palette3 =
       UIColorPalette(&testWindow, "palettes/tempoppy-witchy-muted.colors",
-                     UIPosition(10, 210), UISize(16, 2), UISize(30), 0);
+                     UIPosition(10, 210), UISize(8, 4), UISize(30), 0);
   UIButton clearButton =
       UIButton(&testWindow, "Clear", UIPosition(100, 500), UISize(70, 35),
                UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));

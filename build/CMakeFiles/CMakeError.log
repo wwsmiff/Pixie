@@ -1,0 +1,970 @@
+Performing C SOURCE FILE Test HAVE_GCC_PREFERRED_STACK_BOUNDARY failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-NokMpZ
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_abb0a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_abb0a.dir/build.make CMakeFiles/cmTC_abb0a.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-NokMpZ'
+Building C object CMakeFiles/cmTC_abb0a.dir/src.c.o
+/usr/bin/cc -DHAVE_GCC_PREFERRED_STACK_BOUNDARY  -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos" -mpreferred-stack-boundary=2 -o CMakeFiles/cmTC_abb0a.dir/src.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-NokMpZ/src.c
+cc1: error: '-mpreferred-stack-boundary=2' is not between 3 and 12
+gmake[1]: *** [CMakeFiles/cmTC_abb0a.dir/build.make:78: CMakeFiles/cmTC_abb0a.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-NokMpZ'
+gmake: *** [Makefile:127: cmTC_abb0a/fast] Error 2
+
+
+Source file was:
+int x = 0; int main(int argc, char **argv) { return 0; }
+
+Performing C SOURCE FILE Test HAVE_ALTIVEC_H_HDR failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-wVeJ9g
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_656f6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_656f6.dir/build.make CMakeFiles/cmTC_656f6.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-wVeJ9g'
+Building C object CMakeFiles/cmTC_656f6.dir/src.c.o
+/usr/bin/cc -DHAVE_ALTIVEC_H_HDR  -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos" -maltivec -o CMakeFiles/cmTC_656f6.dir/src.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-wVeJ9g/src.c
+cc: error: unrecognized command-line option '-maltivec'
+gmake[1]: *** [CMakeFiles/cmTC_656f6.dir/build.make:78: CMakeFiles/cmTC_656f6.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-wVeJ9g'
+gmake: *** [Makefile:127: cmTC_656f6/fast] Error 2
+
+
+Source file was:
+
+          #include <altivec.h>
+          vector unsigned int vzero() {
+              return vec_splat_u32(0);
+          }
+          int main(int argc, char **argv) { return 0; }
+
+Performing C SOURCE FILE Test HAVE_ALTIVEC failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-cKtnVN
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_878ef/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_878ef.dir/build.make CMakeFiles/cmTC_878ef.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-cKtnVN'
+Building C object CMakeFiles/cmTC_878ef.dir/src.c.o
+/usr/bin/cc -DHAVE_ALTIVEC  -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos" -maltivec -o CMakeFiles/cmTC_878ef.dir/src.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-cKtnVN/src.c
+cc: error: unrecognized command-line option '-maltivec'
+gmake[1]: *** [CMakeFiles/cmTC_878ef.dir/build.make:78: CMakeFiles/cmTC_878ef.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-cKtnVN'
+gmake: *** [Makefile:127: cmTC_878ef/fast] Error 2
+
+
+Source file was:
+
+          vector unsigned int vzero() {
+              return vec_splat_u32(0);
+          }
+          int main(int argc, char **argv) { return 0; }
+
+Determining if the include file libunwind.h exists failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-IExu1H
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9348d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9348d.dir/build.make CMakeFiles/cmTC_9348d.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-IExu1H'
+Building C object CMakeFiles/cmTC_9348d.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_9348d.dir/CheckIncludeFile.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-IExu1H/CheckIncludeFile.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-IExu1H/CheckIncludeFile.c:1:10: fatal error: libunwind.h: No such file or directory
+    1 | #include <libunwind.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_9348d.dir/build.make:78: CMakeFiles/cmTC_9348d.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-IExu1H'
+gmake: *** [Makefile:127: cmTC_9348d/fast] Error 2
+
+
+
+Determining if the strlcpy exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ePP6nl
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_753c3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_753c3.dir/build.make CMakeFiles/cmTC_753c3.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ePP6nl'
+Building C object CMakeFiles/cmTC_753c3.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_753c3.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ePP6nl/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ePP6nl/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ePP6nl/CheckSymbolExists.c:14:19: error: 'strlcpy' undeclared (first use in this function); did you mean 'strncpy'?
+   14 |   return ((int*)(&strlcpy))[argc];
+      |                   ^~~~~~~
+      |                   strncpy
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ePP6nl/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_753c3.dir/build.make:78: CMakeFiles/cmTC_753c3.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ePP6nl'
+gmake: *** [Makefile:127: cmTC_753c3/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strlcpy
+  return ((int*)(&strlcpy))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the strlcat exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-dOiDoQ
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_97be3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_97be3.dir/build.make CMakeFiles/cmTC_97be3.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-dOiDoQ'
+Building C object CMakeFiles/cmTC_97be3.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_97be3.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-dOiDoQ/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-dOiDoQ/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-dOiDoQ/CheckSymbolExists.c:14:19: error: 'strlcat' undeclared (first use in this function); did you mean 'strncat'?
+   14 |   return ((int*)(&strlcat))[argc];
+      |                   ^~~~~~~
+      |                   strncat
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-dOiDoQ/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_97be3.dir/build.make:78: CMakeFiles/cmTC_97be3.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-dOiDoQ'
+gmake: *** [Makefile:127: cmTC_97be3/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strlcat
+  return ((int*)(&strlcat))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _strrev exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-RHvjAB
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_21747/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_21747.dir/build.make CMakeFiles/cmTC_21747.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-RHvjAB'
+Building C object CMakeFiles/cmTC_21747.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_21747.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-RHvjAB/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-RHvjAB/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-RHvjAB/CheckSymbolExists.c:14:19: error: '_strrev' undeclared (first use in this function)
+   14 |   return ((int*)(&_strrev))[argc];
+      |                   ^~~~~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-RHvjAB/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_21747.dir/build.make:78: CMakeFiles/cmTC_21747.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-RHvjAB'
+gmake: *** [Makefile:127: cmTC_21747/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _strrev
+  return ((int*)(&_strrev))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _strupr exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-w6eq3U
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_86dc0/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_86dc0.dir/build.make CMakeFiles/cmTC_86dc0.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-w6eq3U'
+Building C object CMakeFiles/cmTC_86dc0.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_86dc0.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-w6eq3U/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-w6eq3U/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-w6eq3U/CheckSymbolExists.c:14:19: error: '_strupr' undeclared (first use in this function)
+   14 |   return ((int*)(&_strupr))[argc];
+      |                   ^~~~~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-w6eq3U/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_86dc0.dir/build.make:78: CMakeFiles/cmTC_86dc0.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-w6eq3U'
+gmake: *** [Makefile:127: cmTC_86dc0/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _strupr
+  return ((int*)(&_strupr))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _strlwr exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-gP9Np0
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9fc93/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9fc93.dir/build.make CMakeFiles/cmTC_9fc93.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-gP9Np0'
+Building C object CMakeFiles/cmTC_9fc93.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_9fc93.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-gP9Np0/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-gP9Np0/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-gP9Np0/CheckSymbolExists.c:14:19: error: '_strlwr' undeclared (first use in this function)
+   14 |   return ((int*)(&_strlwr))[argc];
+      |                   ^~~~~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-gP9Np0/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_9fc93.dir/build.make:78: CMakeFiles/cmTC_9fc93.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-gP9Np0'
+gmake: *** [Makefile:127: cmTC_9fc93/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _strlwr
+  return ((int*)(&_strlwr))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the itoa exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Ic4Gl0
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_5061f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5061f.dir/build.make CMakeFiles/cmTC_5061f.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Ic4Gl0'
+Building C object CMakeFiles/cmTC_5061f.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_5061f.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Ic4Gl0/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Ic4Gl0/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Ic4Gl0/CheckSymbolExists.c:14:19: error: 'itoa' undeclared (first use in this function)
+   14 |   return ((int*)(&itoa))[argc];
+      |                   ^~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Ic4Gl0/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_5061f.dir/build.make:78: CMakeFiles/cmTC_5061f.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Ic4Gl0'
+gmake: *** [Makefile:127: cmTC_5061f/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef itoa
+  return ((int*)(&itoa))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _ltoa exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Kr5HsM
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_417b6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_417b6.dir/build.make CMakeFiles/cmTC_417b6.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Kr5HsM'
+Building C object CMakeFiles/cmTC_417b6.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_417b6.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Kr5HsM/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Kr5HsM/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Kr5HsM/CheckSymbolExists.c:14:19: error: '_ltoa' undeclared (first use in this function)
+   14 |   return ((int*)(&_ltoa))[argc];
+      |                   ^~~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Kr5HsM/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_417b6.dir/build.make:78: CMakeFiles/cmTC_417b6.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Kr5HsM'
+gmake: *** [Makefile:127: cmTC_417b6/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _ltoa
+  return ((int*)(&_ltoa))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _uitoa exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-XbW5ZG
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3a0f2/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3a0f2.dir/build.make CMakeFiles/cmTC_3a0f2.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-XbW5ZG'
+Building C object CMakeFiles/cmTC_3a0f2.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_3a0f2.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-XbW5ZG/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-XbW5ZG/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-XbW5ZG/CheckSymbolExists.c:14:19: error: '_uitoa' undeclared (first use in this function)
+   14 |   return ((int*)(&_uitoa))[argc];
+      |                   ^~~~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-XbW5ZG/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_3a0f2.dir/build.make:78: CMakeFiles/cmTC_3a0f2.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-XbW5ZG'
+gmake: *** [Makefile:127: cmTC_3a0f2/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _uitoa
+  return ((int*)(&_uitoa))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _ultoa exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-STV9CL
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9b144/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9b144.dir/build.make CMakeFiles/cmTC_9b144.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-STV9CL'
+Building C object CMakeFiles/cmTC_9b144.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_9b144.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-STV9CL/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-STV9CL/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-STV9CL/CheckSymbolExists.c:14:19: error: '_ultoa' undeclared (first use in this function)
+   14 |   return ((int*)(&_ultoa))[argc];
+      |                   ^~~~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-STV9CL/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_9b144.dir/build.make:78: CMakeFiles/cmTC_9b144.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-STV9CL'
+gmake: *** [Makefile:127: cmTC_9b144/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _ultoa
+  return ((int*)(&_ultoa))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _i64toa exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-3dlAvD
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_6436c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6436c.dir/build.make CMakeFiles/cmTC_6436c.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-3dlAvD'
+Building C object CMakeFiles/cmTC_6436c.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_6436c.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-3dlAvD/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-3dlAvD/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-3dlAvD/CheckSymbolExists.c:14:19: error: '_i64toa' undeclared (first use in this function)
+   14 |   return ((int*)(&_i64toa))[argc];
+      |                   ^~~~~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-3dlAvD/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_6436c.dir/build.make:78: CMakeFiles/cmTC_6436c.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-3dlAvD'
+gmake: *** [Makefile:127: cmTC_6436c/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _i64toa
+  return ((int*)(&_i64toa))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _ui64toa exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-E69i80
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a6838/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a6838.dir/build.make CMakeFiles/cmTC_a6838.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-E69i80'
+Building C object CMakeFiles/cmTC_a6838.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_a6838.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-E69i80/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-E69i80/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-E69i80/CheckSymbolExists.c:14:19: error: '_ui64toa' undeclared (first use in this function)
+   14 |   return ((int*)(&_ui64toa))[argc];
+      |                   ^~~~~~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-E69i80/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_a6838.dir/build.make:78: CMakeFiles/cmTC_a6838.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-E69i80'
+gmake: *** [Makefile:127: cmTC_a6838/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _ui64toa
+  return ((int*)(&_ui64toa))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _stricmp exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-a7Os3q
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_81ee9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_81ee9.dir/build.make CMakeFiles/cmTC_81ee9.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-a7Os3q'
+Building C object CMakeFiles/cmTC_81ee9.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_81ee9.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-a7Os3q/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-a7Os3q/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-a7Os3q/CheckSymbolExists.c:14:19: error: '_stricmp' undeclared (first use in this function); did you mean 'strncmp'?
+   14 |   return ((int*)(&_stricmp))[argc];
+      |                   ^~~~~~~~
+      |                   strncmp
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-a7Os3q/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_81ee9.dir/build.make:78: CMakeFiles/cmTC_81ee9.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-a7Os3q'
+gmake: *** [Makefile:127: cmTC_81ee9/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _stricmp
+  return ((int*)(&_stricmp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _strnicmp exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-2tRy6M
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_892b4/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_892b4.dir/build.make CMakeFiles/cmTC_892b4.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-2tRy6M'
+Building C object CMakeFiles/cmTC_892b4.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_892b4.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-2tRy6M/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-2tRy6M/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-2tRy6M/CheckSymbolExists.c:14:19: error: '_strnicmp' undeclared (first use in this function); did you mean 'strncmp'?
+   14 |   return ((int*)(&_strnicmp))[argc];
+      |                   ^~~~~~~~~
+      |                   strncmp
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-2tRy6M/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_892b4.dir/build.make:78: CMakeFiles/cmTC_892b4.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-2tRy6M'
+gmake: *** [Makefile:127: cmTC_892b4/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _strnicmp
+  return ((int*)(&_strnicmp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _wcsdup exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-sESev1
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_c64be/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c64be.dir/build.make CMakeFiles/cmTC_c64be.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-sESev1'
+Building C object CMakeFiles/cmTC_c64be.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_c64be.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-sESev1/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-sESev1/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-sESev1/CheckSymbolExists.c:14:19: error: '_wcsdup' undeclared (first use in this function); did you mean 'wcsdup'?
+   14 |   return ((int*)(&_wcsdup))[argc];
+      |                   ^~~~~~~
+      |                   wcsdup
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-sESev1/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_c64be.dir/build.make:78: CMakeFiles/cmTC_c64be.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-sESev1'
+gmake: *** [Makefile:127: cmTC_c64be/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _wcsdup
+  return ((int*)(&_wcsdup))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the wcslcat exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-lXq0XN
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_5e456/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5e456.dir/build.make CMakeFiles/cmTC_5e456.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-lXq0XN'
+Building C object CMakeFiles/cmTC_5e456.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_5e456.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-lXq0XN/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-lXq0XN/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-lXq0XN/CheckSymbolExists.c:14:19: error: 'wcslcat' undeclared (first use in this function); did you mean 'wcsncat'?
+   14 |   return ((int*)(&wcslcat))[argc];
+      |                   ^~~~~~~
+      |                   wcsncat
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-lXq0XN/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_5e456.dir/build.make:78: CMakeFiles/cmTC_5e456.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-lXq0XN'
+gmake: *** [Makefile:127: cmTC_5e456/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef wcslcat
+  return ((int*)(&wcslcat))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the wcslcpy exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-zwPnoo
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d8f33/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d8f33.dir/build.make CMakeFiles/cmTC_d8f33.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-zwPnoo'
+Building C object CMakeFiles/cmTC_d8f33.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_d8f33.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-zwPnoo/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-zwPnoo/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-zwPnoo/CheckSymbolExists.c:14:19: error: 'wcslcpy' undeclared (first use in this function); did you mean 'wcsncpy'?
+   14 |   return ((int*)(&wcslcpy))[argc];
+      |                   ^~~~~~~
+      |                   wcsncpy
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-zwPnoo/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_d8f33.dir/build.make:78: CMakeFiles/cmTC_d8f33.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-zwPnoo'
+gmake: *** [Makefile:127: cmTC_d8f33/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef wcslcpy
+  return ((int*)(&wcslcpy))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _wcsicmp exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ZATlcj
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2cf34/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2cf34.dir/build.make CMakeFiles/cmTC_2cf34.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ZATlcj'
+Building C object CMakeFiles/cmTC_2cf34.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_2cf34.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ZATlcj/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ZATlcj/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ZATlcj/CheckSymbolExists.c:14:19: error: '_wcsicmp' undeclared (first use in this function); did you mean 'wcsncmp'?
+   14 |   return ((int*)(&_wcsicmp))[argc];
+      |                   ^~~~~~~~
+      |                   wcsncmp
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ZATlcj/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_2cf34.dir/build.make:78: CMakeFiles/cmTC_2cf34.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-ZATlcj'
+gmake: *** [Makefile:127: cmTC_2cf34/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _wcsicmp
+  return ((int*)(&_wcsicmp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _wcsnicmp exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-pTa1fW
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bda2a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bda2a.dir/build.make CMakeFiles/cmTC_bda2a.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-pTa1fW'
+Building C object CMakeFiles/cmTC_bda2a.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_bda2a.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-pTa1fW/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-pTa1fW/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-pTa1fW/CheckSymbolExists.c:14:19: error: '_wcsnicmp' undeclared (first use in this function); did you mean 'wcsncmp'?
+   14 |   return ((int*)(&_wcsnicmp))[argc];
+      |                   ^~~~~~~~~
+      |                   wcsncmp
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-pTa1fW/CheckSymbolExists.c:14:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_bda2a.dir/build.make:78: CMakeFiles/cmTC_bda2a.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-pTa1fW'
+gmake: *** [Makefile:127: cmTC_bda2a/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stddef.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _wcsnicmp
+  return ((int*)(&_wcsnicmp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the sysctlbyname exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-CqV3x2
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ab7ee/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ab7ee.dir/build.make CMakeFiles/cmTC_ab7ee.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-CqV3x2'
+Building C object CMakeFiles/cmTC_ab7ee.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_ab7ee.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-CqV3x2/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-CqV3x2/CheckSymbolExists.c:3:10: fatal error: sys/sysctl.h: No such file or directory
+    3 | #include <sys/sysctl.h>
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_ab7ee.dir/build.make:78: CMakeFiles/cmTC_ab7ee.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-CqV3x2'
+gmake: *** [Makefile:127: cmTC_ab7ee/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+#include <sys/sysctl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef sysctlbyname
+  return ((int*)(&sysctlbyname))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the elf_aux_info exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-LEKjAP
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b4d69/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b4d69.dir/build.make CMakeFiles/cmTC_b4d69.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-LEKjAP'
+Building C object CMakeFiles/cmTC_b4d69.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_b4d69.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-LEKjAP/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-LEKjAP/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-LEKjAP/CheckSymbolExists.c:8:19: error: 'elf_aux_info' undeclared (first use in this function)
+    8 |   return ((int*)(&elf_aux_info))[argc];
+      |                   ^~~~~~~~~~~~
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-LEKjAP/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_b4d69.dir/build.make:78: CMakeFiles/cmTC_b4d69.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-LEKjAP'
+gmake: *** [Makefile:127: cmTC_b4d69/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/auxv.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef elf_aux_info
+  return ((int*)(&elf_aux_info))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the function iconv_open exists in the iconv failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Wa0dw5
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f63bf/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f63bf.dir/build.make CMakeFiles/cmTC_f63bf.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Wa0dw5'
+Building C object CMakeFiles/cmTC_f63bf.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos" -DCHECK_FUNCTION_EXISTS=iconv_open  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_f63bf.dir/CheckFunctionExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Wa0dw5/CheckFunctionExists.c
+Linking C executable cmTC_f63bf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f63bf.dir/link.txt --verbose=1
+/usr/bin/cc  -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos" -DCHECK_FUNCTION_EXISTS=iconv_open  -D_GNU_SOURCE=1 CMakeFiles/cmTC_f63bf.dir/CheckFunctionExists.c.o -o cmTC_f63bf  -liconv 
+/usr/bin/ld: cannot find -liconv: No such file or directory
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_f63bf.dir/build.make:99: cmTC_f63bf] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Wa0dw5'
+gmake: *** [Makefile:127: cmTC_f63bf/fast] Error 2
+
+
+
+Determining if the alloca exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-BB19GN
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3d672/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3d672.dir/build.make CMakeFiles/cmTC_3d672.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-BB19GN'
+Building C object CMakeFiles/cmTC_3d672.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_3d672.dir/CheckSymbolExists.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-BB19GN/CheckSymbolExists.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-BB19GN/CheckSymbolExists.c: In function 'main':
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-BB19GN/CheckSymbolExists.c:8:19: error: 'alloca' undeclared (first use in this function); did you mean 'valloc'?
+    8 |   return ((int*)(&alloca))[argc];
+      |                   ^~~~~~
+      |                   valloc
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-BB19GN/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_3d672.dir/build.make:78: CMakeFiles/cmTC_3d672.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-BB19GN'
+gmake: *** [Makefile:127: cmTC_3d672/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <malloc.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef alloca
+  return ((int*)(&alloca))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file audio/audiolib.h exists failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-g9XBt4
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_43f7b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_43f7b.dir/build.make CMakeFiles/cmTC_43f7b.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-g9XBt4'
+Building C object CMakeFiles/cmTC_43f7b.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_43f7b.dir/CheckIncludeFile.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-g9XBt4/CheckIncludeFile.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-g9XBt4/CheckIncludeFile.c:1:10: fatal error: audio/audiolib.h: No such file or directory
+    1 | #include <audio/audiolib.h>
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_43f7b.dir/build.make:78: CMakeFiles/cmTC_43f7b.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-g9XBt4'
+gmake: *** [Makefile:127: cmTC_43f7b/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test HAVE_RPI failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Flxprh
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_4878f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_4878f.dir/build.make CMakeFiles/cmTC_4878f.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Flxprh'
+Building C object CMakeFiles/cmTC_4878f.dir/src.c.o
+/usr/bin/cc -DHAVE_RPI  -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1  -I/opt/vc/include -I/opt/vc/include/interface/vcos/pthreads -I/opt/vc/include/interface/vmcs_host/linux/  -L/opt/vc/lib -o CMakeFiles/cmTC_4878f.dir/src.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Flxprh/src.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Flxprh/src.c:2:18: fatal error: bcm_host.h: No such file or directory
+    2 |         #include <bcm_host.h>
+      |                  ^~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_4878f.dir/build.make:78: CMakeFiles/cmTC_4878f.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-Flxprh'
+gmake: *** [Makefile:127: cmTC_4878f/fast] Error 2
+
+
+Source file was:
+
+        #include <bcm_host.h>
+        #include <EGL/eglplatform.h>
+        int main(int argc, char **argv) {
+          EGL_DISPMANX_WINDOW_T window;
+          bcm_host_init();
+        }
+
+Performing C SOURCE FILE Test HAVE_VIVANTE_VDK failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-wCzPvT
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_229c7/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_229c7.dir/build.make CMakeFiles/cmTC_229c7.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-wCzPvT'
+Building C object CMakeFiles/cmTC_229c7.dir/src.c.o
+/usr/bin/cc -DHAVE_VIVANTE_VDK  -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_229c7.dir/src.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-wCzPvT/src.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-wCzPvT/src.c:2:18: fatal error: gc_vdk.h: No such file or directory
+    2 |         #include <gc_vdk.h>
+      |                  ^~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_229c7.dir/build.make:78: CMakeFiles/cmTC_229c7.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-wCzPvT'
+gmake: *** [Makefile:127: cmTC_229c7/fast] Error 2
+
+
+Source file was:
+
+        #include <gc_vdk.h>
+        int main(int argc, char** argv) { return 0; }
+
+Performing C SOURCE FILE Test HAVE_VIVANTE_EGL_FB failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-GfwQz5
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_029b5/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_029b5.dir/build.make CMakeFiles/cmTC_029b5.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-GfwQz5'
+Building C object CMakeFiles/cmTC_029b5.dir/src.c.o
+/usr/bin/cc -DHAVE_VIVANTE_EGL_FB  -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -o CMakeFiles/cmTC_029b5.dir/src.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-GfwQz5/src.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-GfwQz5/src.c:4:18: fatal error: EGL/eglvivante.h: No such file or directory
+    4 |         #include <EGL/eglvivante.h>
+      |                  ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_029b5.dir/build.make:78: CMakeFiles/cmTC_029b5.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-GfwQz5'
+gmake: *** [Makefile:127: cmTC_029b5/fast] Error 2
+
+
+Source file was:
+
+        #define LINUX
+        #define EGL_API_FB
+        #include <EGL/eglvivante.h>
+        int main(int argc, char** argv) { return 0; }
+
+Determining if files pthread_np.h exist failed with the following output:
+Change Dir: /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-q4HfLZ
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_1c271/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_1c271.dir/build.make CMakeFiles/cmTC_1c271.dir/build
+gmake[1]: Entering directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-q4HfLZ'
+Building C object CMakeFiles/cmTC_1c271.dir/HAVE_PTHREAD_NP_H.c.o
+/usr/bin/cc   -idirafter "/home/arvk/Code/cpp/Pixie/build/_deps/sdl2-src/src/video/khronos"  -D_GNU_SOURCE=1 -D_REENTRANT -pthread -o CMakeFiles/cmTC_1c271.dir/HAVE_PTHREAD_NP_H.c.o -c /home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-q4HfLZ/HAVE_PTHREAD_NP_H.c
+/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-q4HfLZ/HAVE_PTHREAD_NP_H.c:2:10: fatal error: pthread_np.h: No such file or directory
+    2 | #include <pthread_np.h>
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_1c271.dir/build.make:78: CMakeFiles/cmTC_1c271.dir/HAVE_PTHREAD_NP_H.c.o] Error 1
+gmake[1]: Leaving directory '/home/arvk/Code/cpp/Pixie/build/CMakeFiles/CMakeScratch/TryCompile-q4HfLZ'
+gmake: *** [Makefile:127: cmTC_1c271/fast] Error 2
+
+
+Source:
+/* */
+#include <pthread_np.h>
+
+
+int main(void){return 0;}
+
