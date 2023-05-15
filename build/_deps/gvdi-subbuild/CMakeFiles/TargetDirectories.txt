@@ -1,0 +1,3 @@
+/home/arvk/Code/cpp/Pixie/build/_deps/gvdi-subbuild/CMakeFiles/gvdi-populate.dir
+/home/arvk/Code/cpp/Pixie/build/_deps/gvdi-subbuild/CMakeFiles/edit_cache.dir
+/home/arvk/Code/cpp/Pixie/build/_deps/gvdi-subbuild/CMakeFiles/rebuild_cache.dir
