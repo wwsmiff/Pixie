@@ -42,10 +42,9 @@ chmod +x ./build.sh
 ```
 
 ### Contributing
- - [Join the Discord server](https://discord.gg/rKvarBcpEk)
  - [contributing.md](contributing.md)
 
 ### Libraries used
- - [SDL2](http://libsdl.org/)
- - [SDL2_ttf](https://wiki.libsdl.org/SDL2_ttf/FrontPage)
- - [stb_image_writer.h](https://github.com/nothings/stb/blob/master/stb_image_write.h)
+ - [SDL2](http://libsdl.org/){:target="_blank"}
+ - [SDL2_ttf](https://wiki.libsdl.org/SDL2_ttf/FrontPage){:target="_blank"}
+ - [stb_image_writer.h](https://github.com/nothings/stb/blob/master/stb_image_write.h){:target="_blank"}
