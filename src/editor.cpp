@@ -3,20 +3,20 @@
 #include <fstream>
 #include <iostream>
 
+#include <gvdi/gvdi.hpp>
+
 #include "editor.h"
 #include "export.h"
 #include "macros.h"
-#include "ui/ui_button.h"
-#include "ui/ui_color_palette.h"
-#include "ui/ui_size.h"
-#include "ui/ui_window.h"
 
+namespace Pixie
+{
 bool Editor::running = true;
 Editor::Editor()
-    : _window("Editor", UISize(WINDOW_WIDTH, WINDOW_HEIGHT), nullptr),
-      _canvasSize(512, 512), _blockSize(16), _scale(1),
-      _grid((this->_canvasSize.w / this->_blockSize.w) *
-                (this->_canvasSize.h / this->_blockSize.h),
+    : mWindow("Editor", Pixie::Size(WINDOW_WIDTH, WINDOW_HEIGHT)),
+      mCanvasSize(512, 512), mBlockSize(16), mScale(1),
+      mGrid((this->mCanvasSize.w / this->mBlockSize.w) *
+                (this->mCanvasSize.h / this->mBlockSize.h),
             0xffffffff)
 {
   /* Do not disable compositor in Xorg */
@@ -28,14 +28,7 @@ Editor::Editor()
     exit(1);
   }
 
-  if (TTF_Init() != 0)
-  {
-    std::cerr << "Failed to initialize SDL2_ttf, " << TTF_GetError()
-              << std::endl;
-    exit(1);
-  }
-
-  for (auto &x : this->_grid)
+  for (auto &x : this->mGrid)
     x = 0x00000000;
 
   this->mainloop();
@@ -46,37 +39,39 @@ Editor::~Editor() { SDL_Quit(); }
 void Editor::draw()
 {
   /* Grid */
-  uint32_t startX = 100 /* * this->_scale */;
-  uint32_t startY = 100 /* * this->_scale */;
+  uint32_t startX = 100 /* * this->mScale */;
+  uint32_t startY = 100 /* * this->mScale */;
 
-  for (uint32_t y = 0; y < (this->_canvasSize.h); y += this->_blockSize.h)
+  for (uint32_t y = 0; y < (this->mCanvasSize.h); y += this->mBlockSize.h)
   {
-    for (uint32_t x = 0; x < (this->_canvasSize.w); x += this->_blockSize.w)
+    for (uint32_t x = 0; x < (this->mCanvasSize.w); x += this->mBlockSize.w)
     {
-      SDL_Rect tmp = {x + startX, y + startY, this->_blockSize.w,
-                      this->_blockSize.h};
-      UIColor current =
-          this->_grid.at((y / this->_blockSize.h) *
-                             (this->_canvasSize.w / this->_blockSize.w) +
-                         (x / this->_blockSize.w));
+      SDL_Rect tmp = {static_cast<int32_t>(x + startX),
+                      static_cast<int32_t>(y + startY),
+                      static_cast<int32_t>(this->mBlockSize.w),
+                      static_cast<int32_t>(this->mBlockSize.h)};
+      Pixie::Rgba current =
+          this->mGrid.at((y / this->mBlockSize.h) *
+                             (this->mCanvasSize.w / this->mBlockSize.w) +
+                         (x / this->mBlockSize.w));
       if (current.hex())
       {
-        SDL_SetRenderDrawColor(this->_window._renderer, current.r, current.g,
-                               current.b, current.a);
-        SDL_RenderFillRect(this->_window._renderer, &tmp);
+        SDL_SetRenderDrawColor(this->mWindow.mRenderer.get(), current.r,
+                               current.g, current.b, current.a);
+        SDL_RenderFillRect(this->mWindow.mRenderer.get(), &tmp);
       }
     }
   }
 
-  SDL_SetRenderDrawColor(this->_window._renderer, 0, 0, 0, 255);
-  for (uint32_t i = 0; i < (this->_canvasSize.h + this->_blockSize.h);
-       i += (this->_blockSize.h * this->_scale))
-    SDL_RenderDrawLine(this->_window._renderer, startY, i + startY,
-                       this->_canvasSize.w + startY, i + startY);
-  for (uint32_t i = 0; i < (this->_canvasSize.w + this->_blockSize.w);
-       i += (this->_blockSize.w * this->_scale))
-    SDL_RenderDrawLine(this->_window._renderer, i + startX, startX, i + startX,
-                       this->_canvasSize.h + startX);
+  SDL_SetRenderDrawColor(this->mWindow.mRenderer.get(), 0, 0, 0, 255);
+  for (uint32_t i = 0; i < (this->mCanvasSize.h + this->mBlockSize.h);
+       i += (this->mBlockSize.h * this->mScale))
+    SDL_RenderDrawLine(this->mWindow.mRenderer.get(), startY, i + startY,
+                       this->mCanvasSize.w + startY, i + startY);
+  for (uint32_t i = 0; i < (this->mCanvasSize.w + this->mBlockSize.w);
+       i += (this->mBlockSize.w * this->mScale))
+    SDL_RenderDrawLine(this->mWindow.mRenderer.get(), i + startX, startX,
+                       i + startX, this->mCanvasSize.h + startX);
 }
 
 void Editor::update() {}
@@ -84,10 +79,10 @@ void Editor::update() {}
 void Editor::save()
 {
   std::ofstream savefile("save.pixie");
-  savefile << this->_canvasSize.w << '\n';
-  savefile << this->_canvasSize.h << '\n';
+  savefile << this->mCanvasSize.w << '\n';
+  savefile << this->mCanvasSize.h << '\n';
 
-  for (const auto &x : this->_grid)
+  for (const auto &x : this->mGrid)
     savefile << x.hex() << '\n';
 
   savefile.close();
@@ -102,12 +97,12 @@ void Editor::open()
   width = std::stoul(line);
   std::getline(savefile, line);
   height = std::stoul(line);
-  this->_grid.clear();
-  this->_grid.resize(width * height);
+  this->mGrid.clear();
+  this->mGrid.resize(width * height);
   size_t counter = 0;
   while (std::getline(savefile, line))
   {
-    this->_grid.at(counter) = UIColor(std::stoul(line));
+    this->mGrid.at(counter) = Pixie::Rgba(std::stoul(line));
     counter++;
   }
 
@@ -117,46 +112,16 @@ void Editor::open()
 void Editor::mainloop()
 {
   SDL_Event event;
-  UIWindow testWindow("Tools", UISize(600, 800), &event);
-  testWindow.setFont("Arial/ARIAL.TTF", 32);
-
-  UIColorPalette palette =
-      UIColorPalette(&testWindow, "palettes/sweetie-16.colors",
-                     UIPosition(10, 10), UISize(8, 2), UISize(30), 0);
-  UIColorPalette palette2 =
-      UIColorPalette(&testWindow, "palettes/lost-century.colors",
-                     UIPosition(10, 110), UISize(8, 2), UISize(30), 0);
-  UIColorPalette palette3 =
-      UIColorPalette(&testWindow, "palettes/tempoppy-witchy-muted.colors",
-                     UIPosition(10, 210), UISize(8, 4), UISize(30), 0);
-  UIButton clearButton =
-      UIButton(&testWindow, "Clear", UIPosition(100, 500), UISize(70, 35),
-               UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
-  UIButton exportPPMButton = UIButton(
-      &testWindow, "Export to PPM", UIPosition(100, 550), UISize(130, 32),
-      UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
-  UIButton exportPNGButton = UIButton(
-      &testWindow, "Export to PNG", UIPosition(250, 550), UISize(130, 32),
-      UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
-  UIButton openButton =
-      UIButton(&testWindow, "Open", UIPosition(100, 600), UISize(75, 35),
-               UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
-  UIButton saveButton =
-      UIButton(&testWindow, "Save", UIPosition(200, 600), UISize(75, 35),
-               UIColor(0xFFFFFFFF), UIColor(0x2a2a2aFF), UIColor(0xFFFFFFFF));
+  gvdi::Instance mainInstance{{600, 800}, "Tools"};
 
   while (this->running)
   {
+    gvdi::Frame frame{mainInstance};
+
     if (SDL_PollEvent(&event))
     {
-      this->_window.handleEvents();
-
-      testWindow.handleEvents();
-      palette.update();
-      palette2.update();
-      palette3.update();
-
-      if (event.window.windowID == SDL_GetWindowID(this->_window._window))
+      this->mWindow.handleEvents();
+      if (event.window.windowID == SDL_GetWindowID(this->mWindow.mWindow.get()))
       {
         if (event.window.event == SDL_WINDOWEVENT_CLOSE)
           this->running = false;
@@ -165,10 +130,10 @@ void Editor::mainloop()
           switch (event.key.keysym.sym)
           {
           case SDLK_DOWN:
-            this->_scale = (this->_scale > 1) ? this->_scale - 1 : 1;
+            this->mScale = (this->mScale > 1) ? this->mScale - 1 : 1;
             break;
           case SDLK_UP:
-            this->_scale = (this->_scale <= 10) ? this->_scale + 1 : 10;
+            this->mScale = (this->mScale <= 10) ? this->mScale + 1 : 10;
             break;
           }
         }
@@ -176,85 +141,83 @@ void Editor::mainloop()
         if (event.type == SDL_MOUSEBUTTONDOWN)
         {
 
-          if (this->_window._mouseX > 100 &&
-              this->_window._mouseX < (100 + this->_canvasSize.w) &&
-              this->_window._mouseY > 100 &&
-              this->_window._mouseY <
+          if (this->mWindow.mMouseX > 100 &&
+              this->mWindow.mMouseX < (100 + this->mCanvasSize.w) &&
+              this->mWindow.mMouseY > 100 &&
+              this->mWindow.mMouseY <
                   (100 +
-                   this->_canvasSize
+                   this->mCanvasSize
                        .h)) /* A very temporary and crappy fix for preventing a
                                crash when clicking outside the grid */
           {
             if (event.button.button == SDL_BUTTON_LEFT)
             {
-              UIColor &current = this->_grid.at(
-                  ((this->_window._mouseY - 100) / this->_blockSize.h) *
-                      (this->_canvasSize.w / this->_blockSize.w) +
-                  ((this->_window._mouseX - 100) / this->_blockSize.w));
-              current = UIColorPalette::selectedColor;
+              Pixie::Rgba &current = this->mGrid.at(
+                  ((this->mWindow.mMouseY - 100) / this->mBlockSize.h) *
+                      (this->mCanvasSize.w / this->mBlockSize.w) +
+                  ((this->mWindow.mMouseX - 100) / this->mBlockSize.w));
+              current = 0xFF0000FF;
             }
 
             else if (event.button.button == SDL_BUTTON_RIGHT)
             {
-              UIColor &current = this->_grid.at(
-                  ((this->_window._mouseY - 100) / this->_blockSize.h) *
-                      (this->_canvasSize.w / this->_blockSize.w) +
-                  ((this->_window._mouseX - 100) / this->_blockSize.w));
+              Pixie::Rgba &current = this->mGrid.at(
+                  ((this->mWindow.mMouseY - 100) / this->mBlockSize.h) *
+                      (this->mCanvasSize.w / this->mBlockSize.w) +
+                  ((this->mWindow.mMouseX - 100) / this->mBlockSize.w));
               current = 0x00000000;
             }
           }
         }
       }
+    }
 
-      if (openButton.clicked())
-        this->open();
+    ImGui::Begin("Tools", nullptr);
 
-      if (saveButton.clicked())
-        this->save();
+    if (ImGui::Button("Clear"))
+    {
+      for (auto &x : this->mGrid)
+        x = 0x00000000;
+    }
+    if (ImGui::Button("Export to PPM"))
+    {
+      Pixie::Image input(this->mCanvasSize.w / this->mBlockSize.w,
+                         this->mCanvasSize.h / this->mBlockSize.h);
 
-      if (clearButton.clicked())
-        for (auto &x : this->_grid)
-          x = 0x00000000;
-
-      if (exportPPMButton.clicked())
+      Pixie::Image::fromRaw(input, this->mGrid);
+      ImGui::Begin("Finished exporting!");
+      Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
+      Pixie::Image::exportToPPM(target, "output.ppm");
+      ImGui::OpenPopup("Message");
+      if (ImGui::BeginPopup("Message"))
       {
-        Image input(this->_canvasSize.w / this->_blockSize.w,
-                    this->_canvasSize.h / this->_blockSize.h);
-
-        Image::fromRaw(input, this->_grid);
-        Image target = Image::upscale(input, this->_blockSize.w);
-        Image::exportToPPM(target, "output.ppm");
-      }
-
-      if (exportPNGButton.clicked())
-      {
-        Image input(this->_canvasSize.w / this->_blockSize.w,
-                    this->_canvasSize.h / this->_blockSize.h);
-
-        Image::fromRaw(input, this->_grid);
-        Image target = Image::upscale(input, this->_blockSize.w);
-        Image::exportToPNG(target, "output.png");
+        ImGui::Text("Finished exporting!");
+        ImGui::EndPopup();
       }
     }
 
-    SDL_SetRenderDrawColor(this->_window._renderer, 255, 255, 255, 255);
-    SDL_RenderClear(this->_window._renderer);
+    if (ImGui::Button("Export to PNG"))
+    {
+      Pixie::Image input(this->mCanvasSize.w / this->mBlockSize.w,
+                         this->mCanvasSize.h / this->mBlockSize.h);
 
-    testWindow.setBackground(UIColor(0x1a1a1aff));
+      Pixie::Image::fromRaw(input, this->mGrid);
+      Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
+      Pixie::Image::exportToPNG(target, "output.png");
+      ImGui::OpenPopup("Message");
+      if (ImGui::BeginPopup("Message"))
+      {
+        ImGui::Text("Finished exporting to PNG!");
+        ImGui::EndPopup();
+      }
+    }
 
-    palette.draw();
-    palette2.draw();
-    palette3.draw();
-    clearButton.draw();
-    exportPPMButton.draw();
-    exportPNGButton.draw();
-    saveButton.draw();
-    openButton.draw();
+    ImGui::End();
 
-    testWindow.draw();
-
+    SDL_SetRenderDrawColor(this->mWindow.mRenderer.get(), 255, 255, 255, 255);
+    SDL_RenderClear(this->mWindow.mRenderer.get());
     this->draw();
-
-    SDL_RenderPresent(this->_window._renderer);
+    SDL_RenderPresent(this->mWindow.mRenderer.get());
   }
 }
+}; // namespace Pixie

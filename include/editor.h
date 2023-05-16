@@ -1,14 +1,17 @@
-#ifndef EDITOR_H_
-#define EDITOR_H_
+#pragma once
 
 #include <cstdint>
 #include <vector>
 
-#include "ui/ui_color.h"
-#include "ui/ui_window.h"
+#include "rgba.h"
+#include "size.h"
+#include "window.h"
 
 struct SDL_Window;
 struct SDL_Renderer;
+
+namespace Pixie
+{
 
 class Editor
 {
@@ -26,11 +29,11 @@ public:
 protected:
   static constexpr uint32_t WINDOW_WIDTH = 1600;
   static constexpr uint32_t WINDOW_HEIGHT = 900;
-  UIWindow _window;
-  UISize _canvasSize;
-  UISize _blockSize;
-  uint32_t _scale;
-  std::vector<UIColor> _grid;
+  Pixie::Window mWindow;
+  Pixie::Size mCanvasSize;
+  Pixie::Size mBlockSize;
+  uint32_t mScale{};
+  std::vector<Pixie::Rgba> mGrid;
 };
 
-#endif /* EDITOR_H_ */
+}; // namespace Pixie

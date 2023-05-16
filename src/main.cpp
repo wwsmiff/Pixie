@@ -2,6 +2,6 @@
 
 int main()
 {
-  Editor eddy;
+  Pixie::Editor eddy;
   return 0;
 }
