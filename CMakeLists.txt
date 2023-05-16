@@ -8,16 +8,16 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/libsdl-org/SDL
   GIT_TAG ac13ca9
 )
-FetchContent_MakeAvailable(SDL2)
 FetchContent_Declare(
   SDL2_ttf
   GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf
   GIT_TAG 89d1692
 )
 FetchContent_MakeAvailable(SDL2_ttf)
+FetchContent_MakeAvailable(SDL2)
 add_executable(${PROJECT_NAME})
 target_include_directories(${PROJECT_NAME} PRIVATE ./include)
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL2)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2_ttf)
 target_sources(${PROJECT_NAME} PRIVATE 
   src/editor.cpp
