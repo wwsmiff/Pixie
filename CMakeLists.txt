@@ -13,6 +13,7 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/libsdl-org/SDL
   GIT_TAG ac13ca9
 )
+
 FetchContent_MakeAvailable(gvdi)
 FetchContent_MakeAvailable(SDL2)
 add_executable(${PROJECT_NAME})

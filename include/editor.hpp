@@ -17,7 +17,6 @@ class Editor
 {
 public:
   Editor();
-  ~Editor();
   void draw();
   void update();
   void save();

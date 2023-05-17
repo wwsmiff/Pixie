@@ -2,7 +2,10 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <string>
+#include <vector>
 
+#include "portable-file-dialogs.h"
 #include <gvdi/gvdi.hpp>
 
 #include "editor.hpp"
@@ -34,8 +37,6 @@ Editor::Editor()
 
   this->mainloop();
 }
-
-Editor::~Editor() { SDL_Quit(); }
 
 void Editor::draw()
 {
@@ -79,35 +80,53 @@ void Editor::update() {}
 
 void Editor::save()
 {
-  std::ofstream savefile("save.pixie");
-  savefile << this->mCanvasSize.w << '\n';
-  savefile << this->mCanvasSize.h << '\n';
+  auto selection =
+      pfd::open_file("Open", ".", {"Pixie files", "*.pixie"}).result();
+  if (selection.size() > 1)
+    ImGui::OpenPopup("Cannot select multiple files");
+  else if (selection.empty())
+    ImGui::OpenPopup("Select a file");
+  else
+  {
+    std::ofstream savefile(selection[0]);
+    savefile << this->mCanvasSize.w << '\n';
+    savefile << this->mCanvasSize.h << '\n';
 
-  for (const auto &x : this->mGrid)
-    savefile << x.hex() << '\n';
+    for (const auto &x : this->mGrid)
+      savefile << x.hex() << '\n';
 
-  savefile.close();
+    savefile.close();
+  }
 }
 
 void Editor::open()
 {
-  std::ifstream savefile("save.pixie");
-  uint32_t width = 0, height = 0;
-  std::string line;
-  std::getline(savefile, line);
-  width = std::stoul(line);
-  std::getline(savefile, line);
-  height = std::stoul(line);
-  this->mGrid.clear();
-  this->mGrid.resize(width * height);
-  size_t counter = 0;
-  while (std::getline(savefile, line))
+  auto selection =
+      pfd::open_file("Open", ".", {"Pixie files", "*.pixie"}).result();
+  if (selection.size() > 1)
+    ImGui::OpenPopup("Cannot select multiple files");
+  else if (selection.empty())
+    ImGui::OpenPopup("Select a file");
+  else
   {
-    this->mGrid.at(counter) = Pixie::Rgba(std::stoul(line));
-    counter++;
-  }
+    std::ifstream savefile(selection[0]);
+    uint32_t width = 0, height = 0;
+    std::string line;
+    std::getline(savefile, line);
+    width = std::stoul(line);
+    std::getline(savefile, line);
+    height = std::stoul(line);
+    this->mGrid.clear();
+    this->mGrid.resize(width * height);
+    size_t counter = 0;
+    while (std::getline(savefile, line))
+    {
+      this->mGrid.at(counter) = Pixie::Rgba(std::stoul(line));
+      counter++;
+    }
 
-  savefile.close();
+    savefile.close();
+  }
 }
 
 void Editor::mainloop()
@@ -191,13 +210,23 @@ void Editor::mainloop()
 
       Pixie::Image::fromRaw(input, this->mGrid);
       Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
-      Pixie::Image::exportToPPM(target, "output.ppm");
-      ImGui::OpenPopup("Finished Exporting to PPM");
+
+      auto selection =
+          pfd::open_file("Open", ".", {"Image files", "*.ppm"}).result();
+      if (selection.size() > 1)
+        ImGui::OpenPopup("Cannot select multiple files");
+      else if (selection.empty())
+        ImGui::OpenPopup("Select a file");
+      else
+      {
+        Pixie::Image::exportToPPM(target, selection[0]);
+        ImGui::OpenPopup("Finished exporting to PPM");
+      }
     }
 
-    if (ImGui::BeginPopup("Finished Exporting to PPM"))
+    if (ImGui::BeginPopup("Finished exporting to PPM"))
     {
-      ImGui::Text("Finished Exporting to PPM");
+      ImGui::Text("Finished exporting to PPM");
       ImGui::EndPopup();
     }
 
@@ -208,12 +237,40 @@ void Editor::mainloop()
 
       Pixie::Image::fromRaw(input, this->mGrid);
       Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
-      Pixie::Image::exportToPNG(target, "output.png");
-      ImGui::OpenPopup("Finished exporting to PNG!");
+
+      auto selection =
+          pfd::open_file("Open", ".", {"Image files", "*.png"}).result();
+      if (selection.size() > 1)
+        ImGui::OpenPopup("Cannot select multiple files");
+      else if (selection.empty())
+        ImGui::OpenPopup("Select a file");
+      else
+      {
+        Pixie::Image::exportToPNG(target, selection[0]);
+        ImGui::OpenPopup("Finished exporting to PNG!");
+      }
     }
+
     if (ImGui::BeginPopup("Finished exporting to PNG!"))
     {
       ImGui::Text("Finished exporting to PNG!");
+      ImGui::EndPopup();
+    }
+
+    if (ImGui::Button("Save"))
+      this->save();
+    if (ImGui::Button("Open"))
+      this->open();
+
+    if (ImGui::BeginPopup("Cannot select multiple files"))
+    {
+      ImGui::Text("Cannot select multiple files");
+      ImGui::EndPopup();
+    }
+
+    if (ImGui::BeginPopup("Select a file"))
+    {
+      ImGui::Text("Select a file");
       ImGui::EndPopup();
     }
 
@@ -223,10 +280,8 @@ void Editor::mainloop()
     SDL_RenderClear(this->mWindow.mRenderer.get());
     this->draw();
     SDL_RenderPresent(this->mWindow.mRenderer.get());
-
-    uint32_t end = SDL_GetTicks();
-    float secondsElapsed = (end - start) / 1000.0f;
-    SDL_Delay(16);
   }
+
+  SDL_Quit();
 }
 }; // namespace Pixie
