@@ -7,7 +7,7 @@
 #include <sstream>
 #include <stdexcept>
 
-#include "size.h"
+#include "size.hpp"
 
 SDL_Window *createSDL_Window(const char *title, const Pixie::Size &size);
 

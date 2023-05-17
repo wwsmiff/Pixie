@@ -5,9 +5,12 @@
 
 #include <gvdi/gvdi.hpp>
 
-#include "editor.h"
-#include "export.h"
-#include "macros.h"
+#include "editor.hpp"
+#include "export.hpp"
+#include "macros.hpp"
+
+constexpr uint32_t fps_v = 60;
+constexpr uint32_t ticks_per_frame_v = 1000 / fps_v;
 
 namespace Pixie
 {
@@ -20,8 +23,6 @@ Editor::Editor()
             0xffffffff)
 {
   /* Do not disable compositor in Xorg */
-  putenv((char *)"SDL_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR=0");
-
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
   {
     std::cerr << "Failed to initialize SDL2, " << SDL_GetError() << std::endl;
@@ -114,6 +115,7 @@ void Editor::mainloop()
   SDL_Event event;
   gvdi::Instance mainInstance{{600, 800}, "Tools"};
 
+  uint32_t start = SDL_GetTicks();
   while (this->running)
   {
     gvdi::Frame frame{mainInstance};
@@ -147,8 +149,8 @@ void Editor::mainloop()
               this->mWindow.mMouseY <
                   (100 +
                    this->mCanvasSize
-                       .h)) /* A very temporary and crappy fix for preventing a
-                               crash when clicking outside the grid */
+                       .h)) /* A very temporary and crappy fix for preventing
+                               a crash when clicking outside the grid */
           {
             if (event.button.button == SDL_BUTTON_LEFT)
             {
@@ -172,7 +174,10 @@ void Editor::mainloop()
       }
     }
 
-    ImGui::Begin("Tools", nullptr);
+    ImGui::SetNextWindowPos(ImVec2{0, 0});
+    ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+    ImGui::Begin("Tools", nullptr,
+                 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoDecoration);
 
     if (ImGui::Button("Clear"))
     {
@@ -185,15 +190,15 @@ void Editor::mainloop()
                          this->mCanvasSize.h / this->mBlockSize.h);
 
       Pixie::Image::fromRaw(input, this->mGrid);
-      ImGui::Begin("Finished exporting!");
       Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
       Pixie::Image::exportToPPM(target, "output.ppm");
-      ImGui::OpenPopup("Message");
-      if (ImGui::BeginPopup("Message"))
-      {
-        ImGui::Text("Finished exporting!");
-        ImGui::EndPopup();
-      }
+      ImGui::OpenPopup("Finished Exporting to PPM");
+    }
+
+    if (ImGui::BeginPopup("Finished Exporting to PPM"))
+    {
+      ImGui::Text("Finished Exporting to PPM");
+      ImGui::EndPopup();
     }
 
     if (ImGui::Button("Export to PNG"))
@@ -204,12 +209,12 @@ void Editor::mainloop()
       Pixie::Image::fromRaw(input, this->mGrid);
       Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
       Pixie::Image::exportToPNG(target, "output.png");
-      ImGui::OpenPopup("Message");
-      if (ImGui::BeginPopup("Message"))
-      {
-        ImGui::Text("Finished exporting to PNG!");
-        ImGui::EndPopup();
-      }
+      ImGui::OpenPopup("Finished exporting to PNG!");
+    }
+    if (ImGui::BeginPopup("Finished exporting to PNG!"))
+    {
+      ImGui::Text("Finished exporting to PNG!");
+      ImGui::EndPopup();
     }
 
     ImGui::End();
@@ -218,6 +223,10 @@ void Editor::mainloop()
     SDL_RenderClear(this->mWindow.mRenderer.get());
     this->draw();
     SDL_RenderPresent(this->mWindow.mRenderer.get());
+
+    uint32_t end = SDL_GetTicks();
+    float secondsElapsed = (end - start) / 1000.0f;
+    SDL_Delay(16);
   }
 }
 }; // namespace Pixie

@@ -3,9 +3,9 @@
 #include <cstdint>
 #include <vector>
 
-#include "rgba.h"
-#include "size.h"
-#include "window.h"
+#include "rgba.hpp"
+#include "size.hpp"
+#include "window.hpp"
 
 struct SDL_Window;
 struct SDL_Renderer;

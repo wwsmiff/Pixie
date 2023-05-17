@@ -1,7 +1,8 @@
-#include "window.h"
+#include "window.hpp"
 
 SDL_Window *createSDL_Window(const char *title, const Pixie::Size &size)
 {
+  SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0");
   SDL_Window *tmp =
       SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                        size.w, size.h, SDL_WINDOW_SHOWN);

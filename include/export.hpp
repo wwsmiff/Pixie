@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 
-#include "rgba.h"
-#include "size.h"
+#include "rgba.hpp"
+#include "size.hpp"
 
 using std::uint32_t;
 using std::uint8_t;
