@@ -50,5 +50,6 @@ cmake --build build # To build the project
 
 ### Libraries used
  - [SDL2](http://libsdl.org/)
- - [SDL2_ttf](https://wiki.libsdl.org/SDL2_ttf/FrontPage)
+ - [gvdi](https://github.com/karnkaul/gvdi/)
  - [stb_image_writer.h](https://github.com/nothings/stb/blob/master/stb_image_write.h)
+ - [portable-file-dialogs](https://github.com/samhocevar/portable-file-dialogs)
