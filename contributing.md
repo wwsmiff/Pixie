@@ -5,7 +5,6 @@
 # Code style
 - All the code written must be compliant with c++20 in order to maintain coherence.
 - Try to avoid platform-specific code by all means.
-- All the `protected` members of a class must start with an underscore.
 - All files in lower case and snake_case.
 - All common variable and function names in camelCase.
 - All private/protected variables of classes must be prefixed with an `m`.
