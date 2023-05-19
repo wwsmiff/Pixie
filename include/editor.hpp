@@ -12,20 +12,19 @@ struct SDL_Renderer;
 
 namespace Pixie
 {
-
 class Editor
 {
 public:
   Editor();
-  void draw();
-  void update();
-  void save();
-  void open();
-  void mainloop();
-
   static bool running;
 
 protected:
+  void draw();
+  void update();
+  void mainloop();
+  void save();
+  void open();
+  void addPalette(uint32_t width, uint32_t height);
   static constexpr uint32_t WINDOW_WIDTH = 1600;
   static constexpr uint32_t WINDOW_HEIGHT = 900;
   Pixie::Window mWindow;

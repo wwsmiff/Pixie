@@ -2,6 +2,7 @@
 
 SDL_Window *createSDL_Window(const char *title, const Pixie::Size &size)
 {
+  /* Prevents from disabling the compositor for X11 */
   SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0");
   SDL_Window *tmp =
       SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,

@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include "portable-file-dialogs.h"
@@ -11,12 +12,16 @@
 #include "editor.hpp"
 #include "export.hpp"
 #include "macros.hpp"
-
-constexpr uint32_t fps_v = 60;
-constexpr uint32_t ticks_per_frame_v = 1000 / fps_v;
+#include "rgba.hpp"
+#include "rng.hpp"
 
 namespace Pixie
 {
+namespace
+{
+std::unordered_map<uint64_t, bool> gColorList;
+}
+
 bool Editor::running = true;
 Editor::Editor()
     : mWindow("Editor", Pixie::Size(WINDOW_WIDTH, WINDOW_HEIGHT)),
@@ -25,7 +30,6 @@ Editor::Editor()
                 (this->mCanvasSize.h / this->mBlockSize.h),
             0xffffffff)
 {
-  /* Do not disable compositor in Xorg */
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
   {
     std::cerr << "Failed to initialize SDL2, " << SDL_GetError() << std::endl;
@@ -129,6 +133,92 @@ void Editor::open()
   }
 }
 
+void Editor::addPalette(uint32_t width, uint32_t height)
+{
+  constexpr uint32_t xPadding = 2;
+  constexpr uint32_t yPadding = 2;
+  // RED
+  ImVec2 cursor = ImGui::GetCursorPos();
+  float buttonHeight = ImGui::GetFrameHeight();
+  float buttonWidth = buttonHeight;
+  ImDrawList *draw_list = ImGui::GetWindowDrawList();
+
+  std::vector<uint32_t> colors(width * height, 0);
+  /* Handle automatic conversion of ABGR to RGBA*/
+  colors[0] = {0xff0000ff}; /* R */
+  colors[1] = {0xff00ff00}; /* G */
+  colors[2] = {0xffff0000}; /* B */
+
+  for (uint32_t i = 0; i < width * height; ++i)
+  {
+    uint64_t id = Pixie::RNG::generate();
+    if (ImGui::InvisibleButton(std::to_string(id).c_str(),
+                               ImVec2(buttonWidth, buttonHeight)))
+    {
+      for (auto &[color, value] : gColorList)
+      {
+        std::cout << color << std::endl;
+        value = 0;
+      }
+
+      gColorList[id] = 1;
+      // draw_list->AddRectFilled(
+      // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+      // colors[i], buttonHeight, ImDrawFlags_RoundCornersNone);
+    }
+
+    draw_list->AddRectFilled(
+        cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+        colors[i], buttonHeight, ImDrawFlags_RoundCornersNone);
+    if (gColorList[id])
+    {
+      draw_list->AddRect(
+          cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+          ImU32{0xffffffff}, buttonHeight, ImDrawFlags_RoundCornersNone);
+    }
+    else
+    {
+      draw_list->AddRect(
+          cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+          ImU32{0xff000000}, buttonHeight, ImDrawFlags_RoundCornersNone);
+    }
+
+    ImGui::SetCursorPos({cursor.x + buttonWidth, cursor.y});
+    cursor = ImGui::GetCursorPos();
+  }
+
+  // if (ImGui::InvisibleButton("r", ImVec2(buttonWidth, buttonHeight)))
+  // printf("r\n");
+  // draw_list->AddRectFilled(
+  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+  // ImU32{0xff0000ff}, buttonHeight, ImDrawFlags_RoundCornersNone);
+  // draw_list->AddRect(
+  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+  // ImU32{0xffffffff}, buttonHeight, ImDrawFlags_RoundCornersNone);
+  //
+  // ImGui::SetCursorPos({cursor.x + buttonWidth, cursor.y});
+  // cursor = ImGui::GetCursorPos();
+  // if (ImGui::InvisibleButton("g", ImVec2(buttonWidth, buttonHeight)))
+  // printf("g\n");
+  // draw_list->AddRectFilled(
+  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+  // ImU32{0xff00ff00}, buttonHeight, ImDrawFlags_RoundCornersNone);
+  // draw_list->AddRect(
+  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+  // ImU32{0xffffffff}, buttonHeight, ImDrawFlags_RoundCornersNone);
+  //
+  // ImGui::SetCursorPos({cursor.x + buttonWidth, cursor.y});
+  // cursor = ImGui::GetCursorPos();
+  // if (ImGui::InvisibleButton("b", ImVec2(buttonWidth, buttonHeight)))
+  // printf("b\n");
+  // draw_list->AddRectFilled(
+  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+  // ImU32{0xffff0000}, buttonHeight, ImDrawFlags_RoundCornersNone);
+  // draw_list->AddRect(
+  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+  // ImU32{0xffffffff}, buttonHeight, ImDrawFlags_RoundCornersNone);
+}
+
 void Editor::mainloop()
 {
   SDL_Event event;
@@ -193,17 +283,23 @@ void Editor::mainloop()
       }
     }
 
-    ImGui::SetNextWindowPos(ImVec2{0, 0});
+    ImGui::SetNextWindowPos({0, 0});
     ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
     ImGui::Begin("Tools", nullptr,
                  ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoDecoration);
 
-    if (ImGui::Button("Clear"))
+    if (ImGui::Button("Clear", {50, 25}))
     {
       for (auto &x : this->mGrid)
         x = 0x00000000;
     }
-    if (ImGui::Button("Export to PPM"))
+
+    if (ImGui::SameLine(); ImGui::Button("Save", {50, 25}))
+      this->save();
+    if (ImGui::SameLine(); ImGui::Button("Open", {50, 25}))
+      this->open();
+
+    if (ImGui::Button("Export to PPM", {150, 25}))
     {
       Pixie::Image input(this->mCanvasSize.w / this->mBlockSize.w,
                          this->mCanvasSize.h / this->mBlockSize.h);
@@ -230,7 +326,7 @@ void Editor::mainloop()
       ImGui::EndPopup();
     }
 
-    if (ImGui::Button("Export to PNG"))
+    if (ImGui::SameLine(); ImGui::Button("Export to PNG", {150, 25}))
     {
       Pixie::Image input(this->mCanvasSize.w / this->mBlockSize.w,
                          this->mCanvasSize.h / this->mBlockSize.h);
@@ -257,11 +353,6 @@ void Editor::mainloop()
       ImGui::EndPopup();
     }
 
-    if (ImGui::Button("Save"))
-      this->save();
-    if (ImGui::Button("Open"))
-      this->open();
-
     if (ImGui::BeginPopup("Cannot select multiple files"))
     {
       ImGui::Text("Cannot select multiple files");
@@ -273,6 +364,8 @@ void Editor::mainloop()
       ImGui::Text("Select a file");
       ImGui::EndPopup();
     }
+
+    this->addPalette(3, 1);
 
     ImGui::End();
 
