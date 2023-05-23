@@ -19,10 +19,10 @@ namespace Pixie
 {
 namespace
 {
-std::unordered_map<uint64_t, bool> gColorList;
+std::unordered_map<uint64_t, bool> gColorList{};
 }
 
-bool Editor::running = true;
+bool Editor::running{true};
 Editor::Editor()
     : mWindow("Editor", Pixie::Size(WINDOW_WIDTH, WINDOW_HEIGHT)),
       mCanvasSize(512, 512), mBlockSize(16), mScale(1),
@@ -45,8 +45,8 @@ Editor::Editor()
 void Editor::draw()
 {
   /* Grid */
-  uint32_t startX = 100 /* * this->mScale */;
-  uint32_t startY = 100 /* * this->mScale */;
+  uint32_t startX{100}; /* * this->mScale */
+  uint32_t startY{100}; /* * this->mScale */
 
   for (uint32_t y = 0; y < (this->mCanvasSize.h); y += this->mBlockSize.h)
   {
@@ -56,7 +56,7 @@ void Editor::draw()
                       static_cast<int32_t>(y + startY),
                       static_cast<int32_t>(this->mBlockSize.w),
                       static_cast<int32_t>(this->mBlockSize.h)};
-      Pixie::Rgba current =
+      const Pixie::Rgba &current =
           this->mGrid.at((y / this->mBlockSize.h) *
                              (this->mCanvasSize.w / this->mBlockSize.w) +
                          (x / this->mBlockSize.w));
@@ -114,8 +114,8 @@ void Editor::open()
   else
   {
     std::ifstream savefile(selection[0]);
-    uint32_t width = 0, height = 0;
-    std::string line;
+    uint32_t width{}, height{};
+    std::string line{};
     std::getline(savefile, line);
     width = std::stoul(line);
     std::getline(savefile, line);
@@ -135,11 +135,12 @@ void Editor::open()
 
 void Editor::addPalette(uint32_t width, uint32_t height)
 {
-  constexpr uint32_t xPadding = 2;
-  constexpr uint32_t yPadding = 2;
+  constexpr uint32_t xPadding{2};
+  constexpr uint32_t yPadding{2};
+  const ImVec2 originalCursor = ImGui::GetCursorScreenPos();
   ImVec2 cursor = ImGui::GetCursorPos();
-  float buttonHeight = ImGui::GetFrameHeight();
-  float buttonWidth = buttonHeight;
+  float buttonHeight = 32;
+  float buttonWidth = 32;
   ImDrawList *drawList = ImGui::GetWindowDrawList();
 
   std::vector<uint32_t> colors{width * height, 0};
@@ -151,6 +152,11 @@ void Editor::addPalette(uint32_t width, uint32_t height)
   for (uint32_t i = 0; i < width * height; ++i)
   {
     uint64_t randomID = Pixie::RNG::generate();
+
+    drawList->AddRectFilled(
+        cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
+        colors[i], buttonHeight, ImDrawFlags_RoundCornersNone);
+
     if (ImGui::InvisibleButton(std::to_string(randomID).c_str(),
                                ImVec2{buttonWidth, buttonHeight}))
     {
@@ -163,27 +169,11 @@ void Editor::addPalette(uint32_t width, uint32_t height)
       gColorList[randomID] = 1;
     }
 
-    drawList->AddRectFilled(
-        cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
-        colors[i], buttonHeight, ImDrawFlags_RoundCornersNone);
-
-    // if (gColorList[id])
-    // {
-    // drawList->AddRect(
-    // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
-    // ImU32{0xffffffff}, buttonHeight, ImDrawFlags_RoundCornersNone);
-    // }
-    //
-    // else
-    // {
-    // drawList->AddRect(
-    // cursor, ImVec2{cursor.x + buttonWidth, cursor.y + buttonHeight},
-    // ImU32{0xff000000}, buttonHeight, ImDrawFlags_RoundCornersNone);
-    // }
-
-    ImGui::SetCursorPos({cursor.x + buttonWidth, cursor.y});
-    cursor = ImGui::GetCursorPos();
+    cursor.x += buttonWidth;
+    ImGui::SetCursorPos(cursor);
   }
+
+  ImGui::SetCursorScreenPos(originalCursor);
 
   // if (ImGui::InvisibleButton("r", ImVec2(buttonWidth, buttonHeight)))
   // printf("r\n");

@@ -15,11 +15,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(gvdi)
 FetchContent_MakeAvailable(SDL2)
+FetchContent_GetProperties(SDL2 
+  SOURCE_DIRECTORY SDL2_SOURCE_DIR
+)
 add_executable(${PROJECT_NAME})
 add_compile_options(-Wall -Wextra -pedantic)
 include_directories(${SDL2_INCLUDE_DIRS})
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/build/_deps/sdl2-src/include)
+target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_include_directories(${PROJECT_NAME} PRIVATE "${SDL2_SOURCE_DIR}/include")
 target_link_libraries(${PROJECT_NAME} PRIVATE gvdi::gvdi)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2main)
