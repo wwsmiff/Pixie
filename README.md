@@ -18,24 +18,6 @@ Pixie is a pixel art editor written in C++ and SDL2 still in early stages of dev
 ### Building
 Currently, only Linux is supported
 
-Install dependencies:
-- Debian Linux and its derivatives
-```bash
-sudo apt install libsdl2-2.0-0 libsdl2-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev
-```
-- Arch Linux and its derivatives
-```bash
-sudo pacman -S sdl2 sdl2_ttf
-```
-- Fedora Linux
-```bash
-sudo dnf install SDL2 SDL2-devel SDL2_ttf SDL2_ttf-devel
-```
-- Solus
-```bash
-sudo eopkg it sdl2 sdl2-ttf
-```
-
 Build and run:
 ```bash
 git clone https://github.com/wwsmiff/pixel_art_editor
