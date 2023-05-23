@@ -16,6 +16,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(gvdi)
 FetchContent_MakeAvailable(SDL2)
 add_executable(${PROJECT_NAME})
+add_compile_options(-Wall -Wextra -pedantic)
 target_include_directories(${PROJECT_NAME} PRIVATE ./include)
 target_link_libraries(${PROJECT_NAME} PRIVATE gvdi)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2)
