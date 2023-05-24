@@ -9,6 +9,7 @@
 #include "portable-file-dialogs.h"
 #include <gvdi/gvdi.hpp>
 
+#include "color_palette.hpp"
 #include "editor.hpp"
 #include "export.hpp"
 #include "macros.hpp"
@@ -19,9 +20,10 @@ namespace Pixie
 {
 namespace
 {
-std::unordered_map<uint64_t, bool> gColorList{};
-}
+std::unordered_map<std::string, Pixie::ColorPalette> gPalettes;
+};
 
+Rgba Editor::mSelectedColor = 0x00000000;
 bool Editor::running{true};
 Editor::Editor()
     : mWindow("Editor", Pixie::Size(WINDOW_WIDTH, WINDOW_HEIGHT)),
@@ -30,6 +32,7 @@ Editor::Editor()
                 (this->mCanvasSize.h / this->mBlockSize.h),
             0xffffffff)
 {
+
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
   {
     std::cerr << "Failed to initialize SDL2, " << SDL_GetError() << std::endl;
@@ -60,7 +63,7 @@ void Editor::draw()
           this->mGrid.at((y / this->mBlockSize.h) *
                              (this->mCanvasSize.w / this->mBlockSize.w) +
                          (x / this->mBlockSize.w));
-      if (current.hex())
+      if (current.hexRGBA())
       {
         SDL_SetRenderDrawColor(this->mWindow.mRenderer.get(), current.r,
                                current.g, current.b, current.a);
@@ -97,7 +100,7 @@ void Editor::save()
     savefile << this->mCanvasSize.h << '\n';
 
     for (const auto &x : this->mGrid)
-      savefile << x.hex() << '\n';
+      savefile << x.hexRGBA() << '\n';
 
     savefile.close();
   }
@@ -133,84 +136,70 @@ void Editor::open()
   }
 }
 
-void Editor::addPalette(uint32_t width, uint32_t height)
+void Editor::addPalette(const std::string &name, const std::string &path,
+                        uint32_t width, uint32_t height)
 {
-  constexpr uint32_t xPadding{2};
-  constexpr uint32_t yPadding{2};
-  const ImVec2 originalCursor = ImGui::GetCursorScreenPos();
+  Pixie::ColorPalette newPalette(path, width, height);
+  gPalettes[name] = newPalette;
+}
+
+void Editor::drawPalettes()
+{
+  const ImVec2 originalCursor = ImGui::GetCursorPos();
   ImVec2 cursor = ImGui::GetCursorPos();
-  float buttonHeight = 32;
-  float buttonWidth = 32;
+  float buttonWidth{24.0f};
+  float buttonHeight{24.0f};
   ImDrawList *drawList = ImGui::GetWindowDrawList();
 
-  std::vector<uint32_t> colors{width * height, 0};
-  /* TODO: Handle conversion of ABGR to RGBA */
-  colors[0] = {0xff'00'00'ff}; /* R */
-  colors[1] = {0xff'00'ff'00}; /* G */
-  colors[2] = {0xff'ff'00'00}; /* B */
-
-  for (uint32_t i = 0; i < width * height; ++i)
+  for (const auto &[name, palette] : gPalettes)
   {
-    uint64_t randomID = Pixie::RNG::generate();
+    static std::string selectedId{};
 
-    drawList->AddRectFilled(
-        cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
-        colors[i], buttonHeight, ImDrawFlags_RoundCornersNone);
-
-    if (ImGui::InvisibleButton(std::to_string(randomID).c_str(),
-                               ImVec2{buttonWidth, buttonHeight}))
+    for (uint32_t i{}; i < palette.getHeight(); ++i)
     {
-      for (auto &[id, value] : gColorList)
+      for (uint32_t j{}; j < palette.getWidth(); ++j)
       {
-        std::cout << std::hex << id << std::endl;
-        value = 0;
-      }
+        std::string id = name + std::to_string(i * palette.getWidth() + j);
 
-      gColorList[randomID] = 1;
+        drawList->AddRectFilled(
+            cursor, ImVec2{cursor.x + buttonWidth, cursor.y + buttonHeight},
+            palette.getColors()[i * palette.getWidth() + j].hexABGR(),
+            buttonHeight, ImDrawFlags_RoundCornersNone);
+        drawList->AddRect(
+            cursor, ImVec2{cursor.x + buttonWidth, cursor.y + buttonHeight},
+            0xff000000, buttonHeight, ImDrawFlags_RoundCornersNone);
+
+        if (selectedId == id)
+          drawList->AddRect(
+              cursor, ImVec2{cursor.x + buttonWidth, cursor.y + buttonHeight},
+              0xffffffff, buttonHeight, ImDrawFlags_RoundCornersNone);
+        if (ImGui::InvisibleButton(id.c_str(),
+                                   ImVec2{buttonWidth, buttonHeight}))
+        {
+          selectedId = id;
+          Editor::mSelectedColor =
+              palette.getColors()[i * palette.getWidth() + j];
+        }
+
+        cursor.x += buttonWidth;
+        ImGui::SetCursorPos(ImVec2{cursor.x, cursor.y});
+      }
+      cursor.x = originalCursor.x;
+      cursor.y += buttonHeight;
     }
 
-    cursor.x += buttonWidth;
-    ImGui::SetCursorPos(cursor);
+    cursor.y += buttonHeight;
   }
-
-  ImGui::SetCursorScreenPos(originalCursor);
-
-  // if (ImGui::InvisibleButton("r", ImVec2(buttonWidth, buttonHeight)))
-  // printf("r\n");
-  // drawList->AddRectFilled(
-  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
-  // ImU32{0xff0000ff}, buttonHeight, ImDrawFlags_RoundCornersNone);
-  // drawList->AddRect(
-  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
-  // ImU32{0xffffffff}, buttonHeight, ImDrawFlags_RoundCornersNone);
-  //
-  // ImGui::SetCursorPos({cursor.x + buttonWidth, cursor.y});
-  // cursor = ImGui::GetCursorPos();
-  // if (ImGui::InvisibleButton("g", ImVec2(buttonWidth, buttonHeight)))
-  // printf("g\n");
-  // drawList->AddRectFilled(
-  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
-  // ImU32{0xff00ff00}, buttonHeight, ImDrawFlags_RoundCornersNone);
-  // drawList->AddRect(
-  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
-  // ImU32{0xffffffff}, buttonHeight, ImDrawFlags_RoundCornersNone);
-  //
-  // ImGui::SetCursorPos({cursor.x + buttonWidth, cursor.y});
-  // cursor = ImGui::GetCursorPos();
-  // if (ImGui::InvisibleButton("b", ImVec2(buttonWidth, buttonHeight)))
-  // printf("b\n");
-  // drawList->AddRectFilled(
-  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
-  // ImU32{0xffff0000}, buttonHeight, ImDrawFlags_RoundCornersNone);
-  // drawList->AddRect(
-  // cursor, ImVec2(cursor.x + buttonWidth, cursor.y + buttonHeight),
-  // ImU32{0xffffffff}, buttonHeight, ImDrawFlags_RoundCornersNone);
 }
 
 void Editor::mainloop()
 {
   SDL_Event event;
   gvdi::Instance mainInstance{{600, 800}, "Tools"};
+
+  this->addPalette("lost-century", "palettes/lost-century.colors", 8, 2);
+  this->addPalette("lost-century", "palettes/lost-century.colors", 8, 2);
+  this->addPalette("sweetie-16", "palettes/sweetie-16.colors", 8, 2);
 
   uint32_t start = SDL_GetTicks();
   while (this->running)
@@ -255,7 +244,7 @@ void Editor::mainloop()
                   ((this->mWindow.mMouseY - 100) / this->mBlockSize.h) *
                       (this->mCanvasSize.w / this->mBlockSize.w) +
                   ((this->mWindow.mMouseX - 100) / this->mBlockSize.w));
-              current = 0xFF0000FF;
+              current = Editor::mSelectedColor.hexRGBA();
             }
 
             else if (event.button.button == SDL_BUTTON_RIGHT)
@@ -270,6 +259,11 @@ void Editor::mainloop()
         }
       }
     }
+
+    ImGuiStyle *style = &ImGui::GetStyle();
+    ImVec4 *colors = style->Colors;
+
+    colors[ImGuiCol_WindowBg] = ImVec4(0.1f, 0.1f, 0.1f, 1.0f);
 
     ImGui::SetNextWindowPos({0, 0});
     ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
@@ -353,7 +347,7 @@ void Editor::mainloop()
       ImGui::EndPopup();
     }
 
-    this->addPalette(3, 1);
+    this->drawPalettes();
 
     ImGui::End();
 

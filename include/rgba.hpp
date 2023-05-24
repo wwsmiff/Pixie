@@ -19,7 +19,12 @@ struct Rgba
   {
   }
 
-  constexpr uint32_t hex() const
+  constexpr uint32_t hexABGR() const
+  {
+    return ((this->a << 24) | (this->b << 16) | (this->g << 8) | (this->r));
+  }
+
+  constexpr uint32_t hexRGBA() const
   {
     return ((this->r << 24) | (this->g << 16) | (this->b << 8) | (this->a));
   }

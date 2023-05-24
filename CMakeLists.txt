@@ -32,4 +32,5 @@ target_sources(${PROJECT_NAME} PRIVATE
   src/main.cpp
   src/window.cpp
   src/rng.cpp
+  src/color_palette.cpp
 )

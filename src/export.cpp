@@ -76,7 +76,7 @@ Image Image::upscale(const Image &input, uint32_t scale)
     for (x_index = 0; x_index < input.width(); ++x_index)
     {
       const Pixie::Rgba &current = input[Index2D{x_index, y_index}];
-      if (current.hex())
+      if (current.hexRGBA())
       {
         for (uint32_t i = y_index * scale; i < ((y_index + 1) * scale); ++i)
         {
