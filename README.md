@@ -24,7 +24,7 @@ git clone https://github.com/wwsmiff/pixel_art_editor
 cd pixel_art_editor
 cmake -S . -B build # To initialize cmake
 cmake --build build # To build the project
-./build/Pixie # To run the project
+./build/Pixie # To run it
 ```
 
 ### Contributing
