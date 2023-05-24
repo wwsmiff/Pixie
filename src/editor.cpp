@@ -186,9 +186,11 @@ void Editor::drawPalettes()
       }
       cursor.x = originalCursor.x;
       cursor.y += buttonHeight;
+      ImGui::SetCursorPos(ImVec2{cursor.x, cursor.y});
     }
 
     cursor.y += 5; /* Arbitrary constant */
+    ImGui::SetCursorPos(ImVec2{cursor.x, cursor.y});
   }
 }
 
