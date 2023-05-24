@@ -1,2 +1,5 @@
 build
 build/*
+*.ini
+release_build
+release_build/*

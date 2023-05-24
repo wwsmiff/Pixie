@@ -198,7 +198,6 @@ void Editor::mainloop()
   gvdi::Instance mainInstance{{600, 800}, "Tools"};
 
   this->addPalette("lost-century", "palettes/lost-century.colors", 8, 2);
-  this->addPalette("lost-century", "palettes/lost-century.colors", 8, 2);
   this->addPalette("sweetie-16", "palettes/sweetie-16.colors", 8, 2);
 
   uint32_t start = SDL_GetTicks();
