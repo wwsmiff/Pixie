@@ -188,7 +188,7 @@ void Editor::drawPalettes()
       cursor.y += buttonHeight;
     }
 
-    cursor.y += buttonHeight;
+    cursor.y += 5; /* Arbitrary constant */
   }
 }
 
