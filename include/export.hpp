@@ -7,12 +7,14 @@
 #include <string>
 #include <vector>
 
-#include "ui/ui_color.h"
-#include "ui/ui_size.h"
+#include "rgba.hpp"
+#include "size.hpp"
 
 using std::uint32_t;
 using std::uint8_t;
 
+namespace Pixie
+{
 struct Index2D
 {
   uint32_t x{0}, y{0};
@@ -25,14 +27,15 @@ public:
   ~Image();
   static void exportToPPM(const Image &input, const std::string &path);
   static void exportToPNG(const Image &input, const std::string &path);
-  static void fromRaw(Image &image, const std::vector<UIColor> &rawData);
+  static void fromRaw(Image &image, const std::vector<Pixie::Rgba> &rawData);
   static Image upscale(const Image &input, uint32_t scale);
   uint32_t width() const;
   uint32_t height() const;
-  UIColor &operator[](Index2D index);
-  const UIColor &operator[](Index2D index) const;
+  Pixie::Rgba &operator[](Index2D index);
+  const Pixie::Rgba &operator[](Index2D index) const;
 
 private:
-  UISize _extent;
-  std::vector<UIColor> _pixels;
+  Pixie::Size mExtent;
+  std::vector<Pixie::Rgba> mPixels;
 };
+}; // namespace Pixie

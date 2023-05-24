@@ -3,15 +3,18 @@
 
 #include <cstdint>
 
-struct UISize
+namespace Pixie
+{
+
+struct Size
 {
   uint32_t w, h;
 
-  UISize() : w(0), h(0) {}
+  Size() : w(0), h(0) {}
 
-  UISize(uint32_t w, uint32_t h) : w(w), h(h) {}
+  Size(uint32_t w, uint32_t h) : w(w), h(h) {}
 
-  UISize(uint32_t scalar) : w(scalar), h(scalar) {}
+  Size(uint32_t scalar) : w(scalar), h(scalar) {}
 
   void set(uint32_t w, uint32_t h)
   {
@@ -25,5 +28,7 @@ struct UISize
     this->h = scalar;
   }
 };
+
+}; // namespace Pixie
 
 #endif /* UI_SIZE_H_ */
