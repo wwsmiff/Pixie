@@ -11,7 +11,7 @@ Pixie is a pixel art editor written in C++ and SDL2 still in early stages of dev
 - [Planned Bug fixes](planned_bugfixes.md)
 
 ### Screenshots
-![](Screenshots/plain.png)
+![](Screenshots/plain_editor.png)
 ![](Screenshots/super_mushroom_in_editor.png)
 ![](Screenshots/super_mushroom.png)
 
