@@ -20,8 +20,8 @@ Currently, only Linux is supported
 
 Build and run:
 ```bash
-git clone https://github.com/wwsmiff/pixel_art_editor
-cd pixel_art_editor
+git clone https://github.com/wwsmiff/Pixie
+cd Pixie
 cmake -S . -B build # To initialize cmake
 cmake --build build # To build the project
 ./build/Pixie # To run it
