@@ -4,7 +4,8 @@ Pixie is a pixel art editor written in C++ and SDL2 still in early stages of dev
 
 ### Requirements
 - Any c++ compiler thats supports c++20
-- cmake >= 3.18
+- Cmake >= 3.18
+- Make
 
 ### TODO
 - [Planned Features](planned_features.md)
