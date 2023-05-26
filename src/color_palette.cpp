@@ -9,12 +9,13 @@ namespace Pixie
 {
 ColorPalette::ColorPalette() {}
 
-ColorPalette::ColorPalette(const std::string &path, uint32_t width,
-                           uint32_t height)
-    : mWidth{width}, mHeight{height}, mColors(width * height, 0)
+ColorPalette::ColorPalette(const std::string &path)
 {
   std::ifstream file(path);
+  file >> mWidth >> mHeight;
+  this->mColors.resize(mWidth * mHeight, 0);
   std::string line{};
+  std::getline(file, line);
   for (size_t i{}; std::getline(file, line); ++i)
     this->mColors.at(i) = std::stoul(line, nullptr, 16);
 }

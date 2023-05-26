@@ -4,7 +4,7 @@
  - [ ] Add support for Windows.
  - [ ] Add support for MacOS.
  - [x] Add support for selecting files when saving, exporting and opening files.
- - [ ] Add support for adding new color palettes easily.
+ - [x] Add support for adding new color palettes easily.
  - [ ] Add support for other image formats.
 
  - #### Polishes

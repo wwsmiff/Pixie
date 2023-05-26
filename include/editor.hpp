@@ -16,7 +16,7 @@ class Editor
 {
 public:
   Editor();
-  static bool running;
+  constexpr bool running() const;
 
 protected:
   void draw();
@@ -24,16 +24,16 @@ protected:
   void mainloop();
   void save();
   void open();
-  void addPalette(const std::string &name, const std::string &path,
-                  uint32_t width, uint32_t height);
+  void addPalette(const std::string &path);
   void drawPalettes();
-  static constexpr uint32_t WINDOW_WIDTH = 1600;
-  static constexpr uint32_t WINDOW_HEIGHT = 900;
+  static constexpr uint32_t WINDOW_WIDTH{1600};
+  static constexpr uint32_t WINDOW_HEIGHT{900};
+  bool mRunning{};
   Pixie::Window mWindow;
-  Pixie::Size mCanvasSize;
-  Pixie::Size mBlockSize;
+  Pixie::Size mCanvasSize{};
+  Pixie::Size mBlockSize{};
   uint32_t mScale{};
-  std::vector<Pixie::Rgba> mGrid;
+  std::vector<Pixie::Rgba> mGrid{};
   static Pixie::Rgba mSelectedColor;
 };
 

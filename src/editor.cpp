@@ -23,16 +23,15 @@ namespace
 std::unordered_map<std::string, Pixie::ColorPalette> gPalettes;
 };
 
-Rgba Editor::mSelectedColor = 0x00000000;
-bool Editor::running{true};
+Rgba Editor::mSelectedColor{0};
 Editor::Editor()
-    : mWindow("Editor", Pixie::Size(WINDOW_WIDTH, WINDOW_HEIGHT)),
-      mCanvasSize(512, 512), mBlockSize(16), mScale(1),
+    : mRunning{true}, mWindow{"Editor",
+                              Pixie::Size{WINDOW_WIDTH, WINDOW_HEIGHT}},
+      mCanvasSize{512, 512}, mBlockSize{16}, mScale{1},
       mGrid((this->mCanvasSize.w / this->mBlockSize.w) *
                 (this->mCanvasSize.h / this->mBlockSize.h),
             0xffffffff)
 {
-
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
   {
     std::cerr << "Failed to initialize SDL2, " << SDL_GetError() << std::endl;
@@ -44,6 +43,8 @@ Editor::Editor()
 
   this->mainloop();
 }
+
+constexpr bool Editor::running() const { return this->mRunning; }
 
 void Editor::draw()
 {
@@ -136,11 +137,9 @@ void Editor::open()
   }
 }
 
-void Editor::addPalette(const std::string &name, const std::string &path,
-                        uint32_t width, uint32_t height)
+void Editor::addPalette(const std::string &path)
 {
-  Pixie::ColorPalette newPalette(path, width, height);
-  gPalettes[name] = newPalette;
+  gPalettes[path] = Pixie::ColorPalette(path);
 }
 
 void Editor::drawPalettes()
@@ -150,11 +149,10 @@ void Editor::drawPalettes()
   float buttonWidth{24.0f};
   float buttonHeight{24.0f};
   ImDrawList *drawList = ImGui::GetWindowDrawList();
+  static std::string selectedId{};
 
   for (const auto &[name, palette] : gPalettes)
   {
-    static std::string selectedId{};
-
     for (uint32_t i{}; i < palette.getHeight(); ++i)
     {
       for (uint32_t j{}; j < palette.getWidth(); ++j)
@@ -199,11 +197,11 @@ void Editor::mainloop()
   SDL_Event event;
   gvdi::Instance mainInstance{{600, 800}, "Tools"};
 
-  this->addPalette("lost-century", "palettes/lost-century.colors", 8, 2);
-  this->addPalette("sweetie-16", "palettes/sweetie-16.colors", 8, 2);
+  // this->addPalette("lost-century", "palettes/lost-century.colors", 8, 2);
+  // this->addPalette("sweetie-16", "palettes/sweetie-16.colors", 8, 2);
 
   uint32_t start = SDL_GetTicks();
-  while (this->running)
+  while (this->mRunning)
   {
     gvdi::Frame frame{mainInstance};
 
@@ -213,7 +211,7 @@ void Editor::mainloop()
       if (event.window.windowID == SDL_GetWindowID(this->mWindow.mWindow.get()))
       {
         if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-          this->running = false;
+          this->mRunning = false;
         if (event.type == SDL_KEYDOWN)
         {
           switch (event.key.keysym.sym)
@@ -284,10 +282,10 @@ void Editor::mainloop()
 
     if (ImGui::Button("Export to PPM", {150, 25}))
     {
-      Pixie::Image input(this->mCanvasSize.w / this->mBlockSize.w,
-                         this->mCanvasSize.h / this->mBlockSize.h);
+      Pixie::Image input(Pixie::Size{this->mCanvasSize.w / this->mBlockSize.w,
+                                     this->mCanvasSize.h / this->mBlockSize.h});
 
-      Pixie::Image::fromRaw(input, this->mGrid);
+      Pixie::Image::loadFromRaw(input, this->mGrid);
       Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
 
       auto selection =
@@ -311,10 +309,10 @@ void Editor::mainloop()
 
     if (ImGui::SameLine(); ImGui::Button("Export to PNG", {150, 25}))
     {
-      Pixie::Image input(this->mCanvasSize.w / this->mBlockSize.w,
-                         this->mCanvasSize.h / this->mBlockSize.h);
+      Pixie::Image input(Pixie::Size{this->mCanvasSize.w / this->mBlockSize.w,
+                                     this->mCanvasSize.h / this->mBlockSize.h});
 
-      Pixie::Image::fromRaw(input, this->mGrid);
+      Pixie::Image::loadFromRaw(input, this->mGrid);
       Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
 
       auto selection =
@@ -328,6 +326,18 @@ void Editor::mainloop()
         Pixie::Image::exportToPNG(target, selection[0]);
         ImGui::OpenPopup("Finished exporting to PNG!");
       }
+    }
+
+    if (ImGui::Button("Add color palette", {200, 25}))
+    {
+      auto selection =
+          pfd::open_file("Open", ".", {"Palettes", "*.palette"}).result();
+      if (selection.size() > 1)
+        ImGui::OpenPopup("Cannot select multiple files");
+      else if (selection.empty())
+        ImGui::OpenPopup("Select a file");
+      else
+        this->addPalette(selection[0]);
     }
 
     if (ImGui::BeginPopup("Finished exporting to PNG!"))

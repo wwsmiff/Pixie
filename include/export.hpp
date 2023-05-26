@@ -1,9 +1,7 @@
 #pragma once
 
-#include <array>
 #include <cstdint>
 #include <fstream>
-#include <span>
 #include <string>
 #include <vector>
 
@@ -23,14 +21,15 @@ struct Index2D
 class Image
 {
 public:
-  Image(uint32_t width, uint32_t height);
+  Image(const Pixie::Size &size);
   ~Image();
   static void exportToPPM(const Image &input, const std::string &path);
   static void exportToPNG(const Image &input, const std::string &path);
-  static void fromRaw(Image &image, const std::vector<Pixie::Rgba> &rawData);
+  static void loadFromRaw(Image &image,
+                          const std::vector<Pixie::Rgba> &rawData);
   static Image upscale(const Image &input, uint32_t scale);
-  uint32_t width() const;
-  uint32_t height() const;
+  uint32_t getWidth() const;
+  uint32_t getHeight() const;
   Pixie::Rgba &operator[](Index2D index);
   const Pixie::Rgba &operator[](Index2D index) const;
 

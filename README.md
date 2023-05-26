@@ -15,6 +15,23 @@ Pixie is a pixel art editor written in C++ and SDL2 still in early stages of dev
 ![](Screenshots/super_mushroom_in_editor.png)
 ![](Screenshots/super_mushroom.png)
 
+### Documentation
+#### Controls
+  - LMB - Fill in a cell
+  - RMB - Clear a cell
+#### Color Palettes
+The name of the file containing the color palette should be `filename.palette`. The first line should contain the width and height separated by space. The following lines should contain the RGBA hex codes of the colors
+##### example
+```
+2 2
+#ff0000ff
+#00ff00ff
+#0000ffff
+#ff00ffff
+```
+and then click on "Add color palette" and choose the file. A few palettes are already provided in `palettes/`
+
+
 ### Building
 Currently, only Linux is supported
 
