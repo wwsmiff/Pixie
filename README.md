@@ -31,16 +31,15 @@ The name of the file containing the color palette should be `filename.palette`. 
 ```
 and then click on "Add color palette" and choose the file. A few palettes are already provided in `palettes/`
 
-
 ### Building
-Currently, only Linux is supported
+Currently, only Linux (X11) is supported
 
 Build and run:
 ```bash
 git clone https://github.com/wwsmiff/pixel_art_editor
 cd pixel_art_editor
 cmake -S . -B build # To initialize cmake
-cmake --build build # To build the project
+cmake --build build -- -j$(nproc) # To build the project
 ./build/Pixie # To run it
 ```
 

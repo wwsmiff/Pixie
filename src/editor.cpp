@@ -32,7 +32,7 @@ Editor::Editor()
                 (this->mCanvasSize.h / this->mBlockSize.h),
             0xffffffff)
 {
-  if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+  if (SDL_Init(SDL_INIT_VIDEO) != 0)
   {
     std::cerr << "Failed to initialize SDL2, " << SDL_GetError() << std::endl;
     exit(1);
