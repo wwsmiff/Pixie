@@ -42,9 +42,22 @@ void Image::exportToPPM(const Image &input, const std::string &path)
 
 void Image::exportToPNG(const Image &input, const std::string &path)
 {
-  uint32_t channels = 4;
+  constexpr uint32_t channels = 4;
   stbi_write_png(path.c_str(), input.getWidth(), input.getHeight(), channels,
                  input.mPixels.data(), input.getWidth() * channels);
+}
+
+void Image::exportToJPG(const Image &input, const std::string &path)
+{
+  constexpr uint32_t channels = 4;
+  constexpr uint32_t quality = 100;
+  stbi_write_jpg(path.c_str(), input.getWidth(), input.getHeight(), channels, input.mPixels.data(), quality);
+}
+
+void Image::exportToBMP(const Image &input, const std::string &path)
+{
+  constexpr uint32_t channels = 4;
+  stbi_write_bmp(path.c_str(), input.getWidth(), input.getHeight(), channels, input.mPixels.data());
 }
 
 void Image::loadFromRaw(Image &image, const std::vector<Pixie::Rgba> &rawData)
@@ -52,9 +65,9 @@ void Image::loadFromRaw(Image &image, const std::vector<Pixie::Rgba> &rawData)
   image.mPixels = rawData;
 }
 
-uint32_t Image::getWidth() const { return this->mExtent.w; }
+constexpr uint32_t Image::getWidth() const { return this->mExtent.w; }
 
-uint32_t Image::getHeight() const { return this->mExtent.h; }
+constexpr uint32_t Image::getHeight() const { return this->mExtent.h; }
 
 Pixie::Rgba &Image::operator[](Index2D index)
 {

@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 FetchContent_Declare(
   gvdi
   GIT_REPOSITORY https://github.com/karnkaul/gvdi
-  GIT_TAG 77db1bd
+  GIT_TAG 5566d28
 )
 FetchContent_Declare(
   SDL2

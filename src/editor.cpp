@@ -197,11 +197,8 @@ void Editor::mainloop()
   SDL_Event event;
   gvdi::Instance mainInstance{{600, 800}, "Tools"};
 
-  // this->addPalette("lost-century", "palettes/lost-century.colors", 8, 2);
-  // this->addPalette("sweetie-16", "palettes/sweetie-16.colors", 8, 2);
-
   uint32_t start = SDL_GetTicks();
-  while (this->mRunning)
+  while (this->running())
   {
     gvdi::Frame frame{mainInstance};
 
@@ -324,10 +321,67 @@ void Editor::mainloop()
       else
       {
         Pixie::Image::exportToPNG(target, selection[0]);
-        ImGui::OpenPopup("Finished exporting to PNG!");
+        ImGui::OpenPopup("Finished exporting to PNG");
       }
     }
+    if (ImGui::BeginPopup("Finished exporting to PNG"))
+    {
+      ImGui::Text("Finished exporting to PNG");
+      ImGui::EndPopup();
+    }
 
+   if (ImGui::Button("Export to JPG", {150, 25}))
+   {
+      Pixie::Image input(Pixie::Size{this->mCanvasSize.w / this->mBlockSize.w,
+                                     this->mCanvasSize.h / this->mBlockSize.h});
+
+      Pixie::Image::loadFromRaw(input, this->mGrid);
+      Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
+
+      auto selection =
+          pfd::open_file("Open", ".", {"Image files", "*.jpg"}).result();
+      if (selection.size() > 1)
+        ImGui::OpenPopup("Cannot select multiple files");
+      else if (selection.empty())
+        ImGui::OpenPopup("Select a file");
+      else
+      {
+        Pixie::Image::exportToJPG(target, selection[0]);
+        ImGui::OpenPopup("Finished exporting to JPG");
+      }
+    }
+    if (ImGui::BeginPopup("Finished exporting to JPG"))
+    {
+      ImGui::Text("Finished exporting to JPG");
+      ImGui::EndPopup();
+    }
+
+   if (ImGui::SameLine(); ImGui::Button("Export to BMP", {150, 25}))
+   {
+      Pixie::Image input(Pixie::Size{this->mCanvasSize.w / this->mBlockSize.w,
+                                     this->mCanvasSize.h / this->mBlockSize.h});
+
+      Pixie::Image::loadFromRaw(input, this->mGrid);
+      Pixie::Image target = Image::upscale(input, this->mBlockSize.w);
+
+      auto selection =
+          pfd::open_file("Open", ".", {"Image files", "*.bmp"}).result();
+      if (selection.size() > 1)
+        ImGui::OpenPopup("Cannot select multiple files");
+      else if (selection.empty())
+        ImGui::OpenPopup("Select a file");
+      else
+      {
+        Pixie::Image::exportToBMP(target, selection[0]);
+        ImGui::OpenPopup("Finished exporting to BMP");
+      }
+    }
+    if (ImGui::BeginPopup("Finished exporting to BMP"))
+    {
+      ImGui::Text("Finished exporting to BMP");
+      ImGui::EndPopup();
+    }
+ 
     if (ImGui::Button("Add color palette", {200, 25}))
     {
       auto selection =

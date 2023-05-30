@@ -5,7 +5,7 @@
  - [ ] Add support for MacOS.
  - [x] Add support for selecting files when saving, exporting and opening files.
  - [x] Add support for adding new color palettes easily.
- - [ ] Add support for other image formats.
+ - [x] Add support for other image formats.
 
  - #### Polishes
     - [x] Distinct border around selected color in color palettes.

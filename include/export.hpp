@@ -25,11 +25,13 @@ public:
   ~Image();
   static void exportToPPM(const Image &input, const std::string &path);
   static void exportToPNG(const Image &input, const std::string &path);
-  static void loadFromRaw(Image &image,
+  static void exportToJPG(const Image &input, const std::string &path);
+  static void exportToBMP(const Image &input, const std::string &path);
+static void loadFromRaw(Image &image,
                           const std::vector<Pixie::Rgba> &rawData);
   static Image upscale(const Image &input, uint32_t scale);
-  uint32_t getWidth() const;
-  uint32_t getHeight() const;
+  constexpr uint32_t getWidth() const;
+  constexpr uint32_t getHeight() const;
   Pixie::Rgba &operator[](Index2D index);
   const Pixie::Rgba &operator[](Index2D index) const;
 
